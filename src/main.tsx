@@ -8,8 +8,13 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ThemeProvider
       theme={createTheme({
-        palette: { mode: "dark", secondary: { main: "#BBB" } },
+        palette: {
+          mode: "dark",
+          primary: { main: "#17bfac" },
+          secondary: { main: "#BBB" },
+        },
         shape: { borderRadius: 0 },
+        typography: { fontSize: 12 },
         components: {
           MuiButtonBase: { defaultProps: { disableRipple: true } },
           MuiToggleButtonGroup: { defaultProps: { size: "small" } },

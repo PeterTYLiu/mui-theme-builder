@@ -1,8 +1,17 @@
-import { AccountCircle, Add, Upgrade } from "@mui/icons-material";
+import {
+  AccountCircle,
+  AcUnitSharp,
+  Add,
+  GasMeterRounded,
+  Notifications,
+  TrackChanges,
+  Upgrade,
+} from "@mui/icons-material";
 import {
   Alert,
   AppBar,
   Avatar,
+  Badge,
   Box,
   Button,
   Chip,
@@ -23,6 +32,12 @@ import {
   Typography,
   type ChipProps,
 } from "@mui/material";
+import {
+  FAKE_DATA_1,
+  FAKE_DATA_2,
+  FAKE_DATA_3,
+  Sparkline,
+} from "../Sparkline/Sparkline";
 
 interface Order {
   id: string;
@@ -92,8 +107,8 @@ export const MockApp = () => {
         bgcolor: "background.default",
         borderRadius: 1.5,
         overflow: "hidden",
-        width: "90%",
-        maxHeight: "92dvh",
+        maxWidth: "min(1920px, 100%)",
+        maxHeight: "100%",
         overflowY: "scroll",
       }}
     >
@@ -102,6 +117,11 @@ export const MockApp = () => {
           <Typography component="h1" variant="h6" sx={{ flexGrow: 1 }}>
             OrderTracker Pro
           </Typography>
+          <IconButton size="large" color="inherit">
+            <Badge badgeContent={4} color="secondary">
+              <Notifications />
+            </Badge>
+          </IconButton>
           <IconButton size="large" color="inherit">
             <AccountCircle />
           </IconButton>
@@ -133,13 +153,41 @@ export const MockApp = () => {
         </Stack>
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
           <TableContainer component={Paper} sx={{ flex: "1 1 440px" }}>
-            <Table size="small">
+            <Table size="small" stickyHeader>
               <TableHead>
                 <TableRow>
-                  <TableCell>Order ID</TableCell>
-                  <TableCell>Driver</TableCell>
-                  <TableCell>Customer</TableCell>
-                  <TableCell>Status</TableCell>
+                  <TableCell
+                    sx={{
+                      bgcolor: "background.paper",
+                      backgroundImage: "var(--Paper-overlay)",
+                    }}
+                  >
+                    Order ID
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      bgcolor: "background.paper",
+                      backgroundImage: "var(--Paper-overlay)",
+                    }}
+                  >
+                    Driver
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      bgcolor: "background.paper",
+                      backgroundImage: "var(--Paper-overlay)",
+                    }}
+                  >
+                    Customer
+                  </TableCell>
+                  <TableCell
+                    sx={{
+                      bgcolor: "background.paper",
+                      backgroundImage: "var(--Paper-overlay)",
+                    }}
+                  >
+                    Status
+                  </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>
@@ -185,7 +233,7 @@ export const MockApp = () => {
               </TableBody>
             </Table>
           </TableContainer>
-          <Paper sx={{ p: 2, flexGrow: 1 }}>
+          <Paper sx={{ p: 2, flex: "1 1 250px" }}>
             <Stack
               direction="row"
               justifyContent="space-between"
@@ -203,15 +251,32 @@ export const MockApp = () => {
             </Stack>
             <Divider />
             <Box py={1.5}>
+              <Typography variant="subtitle2">Net revenue</Typography>
               <Typography variant="h4">
                 $32,619
                 <Typography variant="h6" component="span">
                   .37
                 </Typography>
               </Typography>
-              <Typography variant="caption">Net revenue</Typography>
             </Box>
             <Divider />
+            <Stack pt={1.5} gap={2}>
+              <Sparkline
+                title="Tracking events"
+                data={FAKE_DATA_1}
+                icon={<TrackChanges fontSize="small" />}
+              />
+              <Sparkline
+                title="Retention rate"
+                data={FAKE_DATA_2}
+                icon={<GasMeterRounded fontSize="small" />}
+              />
+              <Sparkline
+                title="Customer TTRs"
+                data={FAKE_DATA_3}
+                icon={<AcUnitSharp fontSize="small" />}
+              />
+            </Stack>
           </Paper>
         </Box>
       </Box>

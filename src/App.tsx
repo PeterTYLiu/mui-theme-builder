@@ -1,6 +1,8 @@
 import {
   Box,
+  Button,
   Paper,
+  Stack,
   ThemeProvider,
   createTheme,
   type ThemeOptions,
@@ -39,24 +41,40 @@ function App() {
       >
         <Paper
           sx={{
-            width: "200px",
+            flex: "0 0 200px",
           }}
         >
           Hello
         </Paper>
-        <Box
+        <Stack
           sx={{
+            height: "100dvh",
             flexGrow: 1,
-            display: "grid",
-            placeItems: "center",
+            alignContent: "stretch",
             background:
               "conic-gradient(#666 25%, #585858 0 50%, #666 0 75%, #585858 0) 0 0/25px 25px",
           }}
         >
-          <ThemeProvider theme={innerTheme}>
-            <MockApp />
-          </ThemeProvider>
-        </Box>
+          <Box
+            sx={{
+              display: "grid",
+              placeItems: "center",
+              minHeight: 0,
+              flexGrow: 1,
+              padding: 4,
+              pb: 3,
+            }}
+          >
+            <ThemeProvider theme={innerTheme}>
+              <MockApp />
+            </ThemeProvider>
+          </Box>
+          <Stack gap={2} p={4} pt={0} alignItems="center">
+            <Stack gap={1} direction="row">
+              <Button size="large">Randomize!</Button>
+            </Stack>
+          </Stack>
+        </Stack>
         <ToolsPanel />
       </Box>
     </InnerThemeContext>
