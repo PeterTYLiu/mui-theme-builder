@@ -4,6 +4,7 @@ import { useState, type ReactNode } from "react";
 import { FieldGroupContainer } from "../FieldGroupContainer/FieldGroupContainer";
 import { PaletteEditor } from "../PaletteEditor/PaletteEditor";
 import { ShapeEditor } from "../ShapeEditor/ShapeEditor";
+import { TextEditor } from "../TextEditor.tsx/TextEditor";
 
 type Section = "colors" | "text" | "shape & spacing";
 const BUTTON_DATA: { name: Section; icon: ReactNode }[] = [
@@ -52,6 +53,7 @@ export const EditorPanel = () => {
       <Box sx={{ flex: "0px 1 1", overflowY: "scroll" }}>
         {section === "colors" && <PaletteEditor />}
         {section === "shape & spacing" && <ShapeEditor />}
+        {section === "text" && <TextEditor />}
       </Box>
     </Box>
   );

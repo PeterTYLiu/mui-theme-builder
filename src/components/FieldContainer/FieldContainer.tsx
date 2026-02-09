@@ -34,7 +34,11 @@ export const FieldContainer = ({
             marginInlineEnd: 2,
           }}
         >
-          <Typography textTransform="capitalize" variant="subtitle2">
+          <Typography
+            textTransform="capitalize"
+            variant="subtitle2"
+            color="textSecondary"
+          >
             {title}
           </Typography>
         </Box>
@@ -52,7 +56,7 @@ export const FieldContainer = ({
         {isDefault ? (
           <Typography
             variant="subtitle2"
-            color="text.secondary"
+            color="textDisabled"
             sx={{ fontSize: 11 }}
           >
             auto

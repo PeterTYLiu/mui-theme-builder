@@ -20,7 +20,6 @@ function App() {
   const innerTheme = createTheme(themeOptions);
   const mergeThemeOptions = (partialThemeOptions: ThemeOptions) =>
     setThemeOptions(merge(structuredClone(themeOptions), partialThemeOptions));
-
   const deleteThemeOptionKey = (keyPath: Array<string>) =>
     setThemeOptions(deleteKeys(themeOptions, keyPath));
 
@@ -45,6 +44,7 @@ function App() {
       >
         <Paper
           sx={{
+            display: { xs: "none", sm: "flex" },
             flex: "0 0 200px",
           }}
         >
