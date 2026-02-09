@@ -1,11 +1,10 @@
 import {
-  Box,
   ToggleButton,
   ToggleButtonGroup,
   type PaletteOptions,
 } from "@mui/material";
-import { DIVIDER_COLOR, EDITOR_PANEL_PADDING } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
+import { FieldGroupContainer } from "../FieldGroupContainer/FieldGroupContainer";
 import { SubpaletteEditor } from "../SubpaletteEditor/SubpaletteEditor";
 
 const COLORS_BOTTOM: Array<keyof PaletteOptions> = [
@@ -20,13 +19,7 @@ export const PaletteEditor = () => {
   const { theme, mergeThemeOptions } = useInnerTheme();
   return (
     <>
-      <Box
-        sx={{
-          p: EDITOR_PANEL_PADDING,
-          borderBottom: 1,
-          borderColor: DIVIDER_COLOR,
-        }}
-      >
+      <FieldGroupContainer>
         <ToggleButtonGroup
           fullWidth
           value={theme.palette.mode}
@@ -39,7 +32,7 @@ export const PaletteEditor = () => {
           <ToggleButton value="light">Light</ToggleButton>
           <ToggleButton value="dark">Dark</ToggleButton>
         </ToggleButtonGroup>
-      </Box>
+      </FieldGroupContainer>
       <SubpaletteEditor
         name="primary"
         manual={["main"]}

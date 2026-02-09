@@ -1,24 +1,21 @@
-import { Refresh } from "@mui/icons-material";
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import { Chrome } from "@uiw/react-color";
 import { useRef, type FocusEvent, type KeyboardEvent } from "react";
 import { decimalToHex, intToHex, toStandardHex } from "../../utils";
-import { FieldContainer } from "../FieldContainer/FieldContainer";
+import {
+  FieldContainer,
+  type FieldContainerProps,
+} from "../FieldContainer/FieldContainer";
 
-interface ColorPickerProps {
-  name: string;
+interface ColorPickerProps extends FieldContainerProps {
   value: string;
-  isDefault: boolean;
   onChange: (hex: string) => void;
-  onReset: () => void;
 }
 
 export const ColorPicker = ({
-  name,
   value,
-  isDefault,
   onChange,
-  onReset,
+  ...fieldContainerProps
 }: ColorPickerProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -41,7 +38,7 @@ export const ColorPicker = ({
   };
 
   return (
-    <FieldContainer title={name}>
+    <FieldContainer {...fieldContainerProps}>
       <Box
         component="button"
         popoverTarget={popverId}
@@ -128,31 +125,6 @@ export const ColorPicker = ({
           textAlign: "center",
         }}
       /> */}
-      <Box
-        sx={{
-          width: "50px",
-          textAlign: "center",
-          flexShrink: 0,
-          display: "grid",
-          placeItems: "center",
-        }}
-      >
-        {isDefault ? (
-          <Typography
-            variant="subtitle2"
-            color="text.secondary"
-            sx={{ fontSize: 11 }}
-          >
-            default
-          </Typography>
-        ) : (
-          <Tooltip title="Reset">
-            <IconButton onClick={onReset} size="small" sx={{ p: 0.5 }}>
-              <Refresh />
-            </IconButton>
-          </Tooltip>
-        )}
-      </Box>
     </FieldContainer>
   );
 };

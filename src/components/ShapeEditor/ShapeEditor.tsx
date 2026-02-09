@@ -1,49 +1,42 @@
-import { Box } from "@mui/material";
-import { DIVIDER_COLOR, EDITOR_PANEL_PADDING } from "../../constants";
+import { DEFAULT_THEME } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
+import { FieldGroupContainer } from "../FieldGroupContainer/FieldGroupContainer";
 import { NumberSpecifier } from "../NumberSpecifier/NumberSpecifier";
 
 export const ShapeEditor = () => {
-  const { theme, mergeThemeOptions } = useInnerTheme();
+  const { theme, mergeThemeOptions, deleteThemeOptionKey } = useInnerTheme();
   return (
     <>
-      <Box
-        sx={{
-          p: EDITOR_PANEL_PADDING,
-          borderBottom: 1,
-          borderColor: DIVIDER_COLOR,
-        }}
-      >
+      <FieldGroupContainer title="Border Radius">
         <NumberSpecifier
-          title="BorderRadius"
+          unit="px"
+          isDefault={
+            theme.shape.borderRadius === DEFAULT_THEME.shape.borderRadius
+          }
           min={0}
-          max={20}
+          max={24}
           step={0.5}
           value={Number(theme.shape.borderRadius)}
           onChange={(num) =>
             mergeThemeOptions({ shape: { borderRadius: num } })
           }
+          onReset={() => deleteThemeOptionKey(["shape", "borderRadius"])}
         />
-      </Box>
-      <Box
-        sx={{
-          p: EDITOR_PANEL_PADDING,
-          borderBottom: 1,
-          borderColor: DIVIDER_COLOR,
-        }}
-      >
+      </FieldGroupContainer>
+      <FieldGroupContainer title="Spacing">
         <NumberSpecifier
-          title="Spacing"
+          unit="px"
           min={6}
           max={14}
           step={0.5}
+          isDefault={theme.spacing(1) === "8px"}
           value={Number(theme.spacing(1).slice(0, -2))}
           onChange={(num) => {
-            console.log(theme.spacing(1));
             mergeThemeOptions({ spacing: num });
           }}
+          onReset={() => deleteThemeOptionKey(["spacing"])}
         />
-      </Box>
+      </FieldGroupContainer>
     </>
   );
 };

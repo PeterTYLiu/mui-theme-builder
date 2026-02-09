@@ -13,13 +13,16 @@ import "./App.css";
 import { MockApp } from "./components/MockApp/MockApp";
 import { ToolsPanel } from "./components/ToolsPanel/ToolsPanel";
 import { InnerThemeContext } from "./hooks/useInnerTheme";
+import { deleteKeys } from "./utils";
 
 function App() {
   const [themeOptions, setThemeOptions] = useState<ThemeOptions>({});
   const innerTheme = createTheme(themeOptions);
-  const mergeThemeOptions = (partialThemeOptions: ThemeOptions) => {
+  const mergeThemeOptions = (partialThemeOptions: ThemeOptions) =>
     setThemeOptions(merge(structuredClone(themeOptions), partialThemeOptions));
-  };
+
+  const deleteThemeOptionKey = (keyPath: Array<string>) =>
+    setThemeOptions(deleteKeys(themeOptions, keyPath));
 
   return (
     <InnerThemeContext
@@ -28,6 +31,7 @@ function App() {
         mergeThemeOptions,
         themeOptions,
         setThemeOptions,
+        deleteThemeOptionKey,
       }}
     >
       <Box
@@ -72,6 +76,7 @@ function App() {
           <Stack gap={2} p={4} pt={0} alignItems="center">
             <Stack gap={1} direction="row">
               <Button size="large">Randomize!</Button>
+              <Button size="large">Save</Button>
             </Stack>
           </Stack>
         </Stack>

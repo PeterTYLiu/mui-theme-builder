@@ -7,6 +7,7 @@ type InnerThemeContextValue = {
   themeOptions: ThemeOptions;
   mergeThemeOptions: (themeOptions: ThemeOptions) => void;
   setThemeOptions: Dispatch<SetStateAction<ThemeOptions>>;
+  deleteThemeOptionKey: (keyPath: Array<string>) => void;
 };
 
 export const InnerThemeContext = createContext<InnerThemeContextValue>({
@@ -14,6 +15,7 @@ export const InnerThemeContext = createContext<InnerThemeContextValue>({
   themeOptions: {},
   mergeThemeOptions: () => {},
   setThemeOptions: () => {},
+  deleteThemeOptionKey: () => {},
 });
 
 export const useInnerTheme = () => use(InnerThemeContext);
