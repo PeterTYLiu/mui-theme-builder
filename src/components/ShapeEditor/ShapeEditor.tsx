@@ -18,7 +18,9 @@ export const ShapeEditor = () => {
           step={0.5}
           value={Number(theme.shape.borderRadius)}
           onChange={(num) =>
-            mergeThemeOptions({ shape: { borderRadius: num } })
+            num === DEFAULT_THEME.shape.borderRadius
+              ? deleteThemeOptionKey(["shape", "borderRadius"])
+              : mergeThemeOptions({ shape: { borderRadius: num } })
           }
           onReset={() => deleteThemeOptionKey(["shape", "borderRadius"])}
         />
@@ -32,7 +34,9 @@ export const ShapeEditor = () => {
           isDefault={theme.spacing(1) === "8px"}
           value={Number(theme.spacing(1).slice(0, -2))}
           onChange={(num) => {
-            mergeThemeOptions({ spacing: num });
+            num === 8
+              ? deleteThemeOptionKey(["spacing"])
+              : mergeThemeOptions({ spacing: num });
           }}
           onReset={() => deleteThemeOptionKey(["spacing"])}
         />

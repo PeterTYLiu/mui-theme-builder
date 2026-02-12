@@ -60,7 +60,11 @@ export const NumberSpecifier = ({
           </Box>
         )}
       </Stack>
-      <Slider onChange={(_, value) => onChange(value)} {...props} />
+      <Slider
+        onChange={(_, value) => onChange(value)}
+        {...props}
+        valueLabelDisplay="off"
+      />
     </FieldContainer>
   );
 };
