@@ -12,10 +12,10 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.7",
-    "@mui/material": "^7.3.7",
+    "@mui/icons-material": "^7.3.8",
+    "@mui/material": "^7.3.8",
     "@mui/x-charts": "^8.27.0",
-    "@uiw/react-color": "^2.9.4",
+    "@uiw/react-color": "^2.9.5",
     "lodash": "^4.17.23",
     "react": "^19.2.0",
     "react-dom": "^19.2.0"
@@ -24,7 +24,7 @@
     "@eslint/js": "^9.39.1",
     "@types/lodash": "^4.17.23",
     "@types/node": "^24.10.1",
-    "@types/react": "^19.2.5",
+    "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react-swc": "^4.2.2",
     "eslint": "^9.39.1",
