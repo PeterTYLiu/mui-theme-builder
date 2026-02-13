@@ -28,7 +28,7 @@ export const FieldContainer = ({
         py: 0.5,
         display: "flex",
         alignItems: "stretch",
-        height: "30px",
+        height: "38px",
       }}
     >
       {Boolean(title) && (

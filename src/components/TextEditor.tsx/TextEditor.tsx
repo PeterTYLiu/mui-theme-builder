@@ -38,6 +38,28 @@ export const WEB_SAFE_FONTS = [
   "Verdana",
 ];
 
+export const EXAMPLE_GOOGLE_FONTS = [
+  "Merriweather",
+  "Open Sans",
+  "Inter",
+  "Montserrat",
+  "Lato",
+  "Noto Sans",
+  "Raleway",
+  "Noto Serif",
+  "Saira",
+  "Source Code Pro",
+  "Space Grotesk",
+  "ABeeZee",
+  "Sanchez",
+  "Libre Baskerville",
+  "Federant",
+  "Bitter",
+  "Lexend",
+  "Marcellus",
+  "Tenor Sans",
+];
+
 const LOWER_CASE_FONTS = [DEFAULT_FONT, "", ...WEB_SAFE_FONTS].map((font) =>
   font.toLowerCase(),
 );
@@ -87,10 +109,20 @@ export const TextEditor = () => {
           inputValue={currentFont}
           freeSolo
           disableClearable={currentFont === DEFAULT_FONT}
-          options={[DEFAULT_FONT, ...WEB_SAFE_FONTS]}
-          groupBy={(option) =>
-            option === DEFAULT_FONT ? "Default" : "Web-safe fonts"
-          }
+          options={[DEFAULT_FONT, ...WEB_SAFE_FONTS, ...EXAMPLE_GOOGLE_FONTS]}
+          groupBy={(option) => {
+            if (
+              WEB_SAFE_FONTS.some(
+                (font) => font.toLowerCase() === option.toLowerCase(),
+              )
+            )
+              return "Web-safe fonts";
+            else if (option === DEFAULT_FONT) {
+              return "Default";
+            } else {
+              return "Google fonts (examples)";
+            }
+          }}
           fullWidth
           renderInput={(params) => <TextField {...params} />}
           renderGroup={(params) => (
@@ -115,7 +147,13 @@ export const TextEditor = () => {
         {isGoogleFont && (
           <Box
             component="pre"
-            sx={{ border: 1, p: 1, overflow: "auto", borderColor: "grey.600" }}
+            sx={{
+              border: 1,
+              p: 1,
+              overflow: "auto",
+              borderColor: "grey.700",
+              bgcolor: "background.default",
+            }}
           >
             {`// Copy into <head> to use this Google Font`}
             <br />

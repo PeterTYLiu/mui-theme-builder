@@ -4,6 +4,7 @@ import {
   Add,
   GasMeterRounded,
   Notifications,
+  Search,
   TrackChanges,
   Upgrade,
 } from "@mui/icons-material";
@@ -28,6 +29,7 @@ import {
   TableContainer,
   TableHead,
   TableRow,
+  TextField,
   Toolbar,
   Typography,
   type ChipProps,
@@ -107,16 +109,39 @@ export const MockApp = () => {
         bgcolor: "background.default",
         borderRadius: 1.5,
         overflow: "hidden",
-        maxWidth: "min(1920px, 100%)",
+        width: "min(1120px, 100%)",
         maxHeight: "100%",
         overflowY: "scroll",
       }}
     >
       <AppBar position="sticky">
-        <Toolbar>
+        <Toolbar sx={{ containerType: "inline-size" }}>
           <Typography component="h1" variant="h6" sx={{ flexGrow: 1 }}>
             OrderTracker Pro
           </Typography>
+          <TextField
+            sx={{
+              color: "inherit",
+              display: { "@1": "none", "@650": "block" },
+            }}
+            slotProps={{
+              input: {
+                startAdornment: <Search sx={{ marginInlineEnd: 0.5 }} />,
+                sx: { color: "inherit" },
+              },
+            }}
+            id="outlined-basic"
+            size="small"
+            placeholder="Search..."
+            variant="outlined"
+          />
+          <IconButton
+            size="large"
+            color="inherit"
+            sx={{ display: { "@650": "none" } }}
+          >
+            <Search />
+          </IconButton>
           <IconButton size="large" color="inherit">
             <Badge badgeContent={4} color="secondary">
               <Notifications />

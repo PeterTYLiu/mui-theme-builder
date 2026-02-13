@@ -1,9 +1,9 @@
 import { Box, Stack, Typography, useTheme } from "@mui/material";
-import { chartsAxisHighlightClasses } from "@mui/x-charts/ChartsAxisHighlight";
 import {
   areaElementClasses,
+  chartsAxisHighlightClasses,
   lineElementClasses,
-} from "@mui/x-charts/LineChart";
+} from "@mui/x-charts";
 import {
   SparkLineChart,
   type SparkLineChartProps,
@@ -660,38 +660,50 @@ export const Sparkline = ({
           justifyContent="space-between"
           alignItems="flex-end"
           gap={2}
+          sx={{ containerType: "inline-size" }}
         >
           <Typography variant="h6" color="textSecondary">
             {downloads[weekIndex ?? downloads.length - 1].toLocaleString()}
           </Typography>
-
-          <SparkLineChart
-            data={downloads}
-            xAxis={{ id: "week-axis", data: weeks }}
-            height={40}
-            area
-            showHighlight
-            color={palette[color].main}
-            onHighlightedAxisChange={(axisItems) => {
-              setWeekIndex(axisItems[0]?.dataIndex ?? null);
-            }}
+          <Box
+            // Might be able to replace this with a simple percentage or something
             sx={{
-              width: "70%",
-              [`& .${areaElementClasses.root}`]: { opacity: 0.2 },
-              [`& .${lineElementClasses.root}`]: { strokeWidth: 3 },
-              [`& .${chartsAxisHighlightClasses.root}`]: {
-                stroke: palette[color].light,
-                strokeDasharray: "none",
-                strokeWidth: 2,
+              width: {
+                "@500": "410px",
+                "@400": "310px",
+                "@300": "210px",
+                "@250": "160px",
+                "@200": "110px",
               },
             }}
-            highlightedAxis={
-              weekIndex === null
-                ? []
-                : [{ axisId: "week-axis", dataIndex: weekIndex }]
-            }
-            {...settings}
-          />
+          >
+            <SparkLineChart
+              data={downloads}
+              xAxis={{ id: "week-axis", data: weeks }}
+              height={40}
+              area
+              showHighlight
+              color={palette[color].main}
+              onHighlightedAxisChange={(axisItems) => {
+                setWeekIndex(axisItems[0]?.dataIndex ?? null);
+              }}
+              sx={{
+                [`& .${areaElementClasses.root}`]: { opacity: 0.2 },
+                [`& .${lineElementClasses.root}`]: { strokeWidth: 3 },
+                [`& .${chartsAxisHighlightClasses.root}`]: {
+                  stroke: palette[color].light,
+                  strokeDasharray: "none",
+                  strokeWidth: 2,
+                },
+              }}
+              highlightedAxis={
+                weekIndex === null
+                  ? []
+                  : [{ axisId: "week-axis", dataIndex: weekIndex }]
+              }
+              {...settings}
+            />
+          </Box>
         </Stack>
       </Stack>
     </Box>

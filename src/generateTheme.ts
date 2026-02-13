@@ -1,31 +1,12 @@
 import { type ThemeOptions, hslToRgb, lighten } from "@mui/material";
 import { random, sample } from "lodash";
-import { WEB_SAFE_FONTS } from "./components/TextEditor.tsx/TextEditor";
+import {
+  EXAMPLE_GOOGLE_FONTS,
+  WEB_SAFE_FONTS,
+} from "./components/TextEditor.tsx/TextEditor";
 import { toStandardHex } from "./utils";
 
-const POSSIBLE_FONTS = [
-  ...WEB_SAFE_FONTS,
-  "Merriweather",
-  "Open Sans",
-  "Inter",
-  "Montserrat",
-  "Lato",
-  "Noto Sans",
-  "Raleway",
-  "Noto Serif",
-  "Saira",
-  "Source Code Pro",
-  "Space Grotesk",
-  "Orbitron",
-  "ABeeZee",
-  "Sanchez",
-  "Libre Baskerville",
-  "Federant",
-  "Bitter",
-  "Lexend",
-  "Marcellus",
-  "Tenor Sans",
-];
+const POSSIBLE_FONTS = [...WEB_SAFE_FONTS, ...EXAMPLE_GOOGLE_FONTS];
 
 const generateRandomPrimaryAndSecondaryColor = (): {
   primary: string;
@@ -74,7 +55,7 @@ export const generateTheme = (): ThemeOptions => {
     shape: { borderRadius: random(0, 12, false) * 2 },
   };
 
-  if (baseFontSize !== 14) newThemeOptions.typography.fontSize = baseFontSize;
+  if (baseFontSize !== 14) newThemeOptions.typography!.fontSize = baseFontSize;
 
   if (baseFontWeight !== 400) {
     newThemeOptions.typography!.fontWeightLight = baseFontWeight - 100;
@@ -85,16 +66,16 @@ export const generateTheme = (): ThemeOptions => {
 
   if (Math.random() > 0.5) {
     const bgcolor = generateRandomDarkBgColor();
-    newThemeOptions.palette.mode = "dark";
-    newThemeOptions.palette.background = {
+    newThemeOptions.palette!.mode = "dark";
+    newThemeOptions.palette!.background = {
       default: bgcolor,
       paper: bgcolor,
     };
   } else {
     const defaultBg = generateRandomLightBgColor();
-    newThemeOptions.palette.background = {
+    newThemeOptions.palette!.background = {
       default: defaultBg,
-      paper: lighten(defaultBg, Math.random()),
+      paper: lighten(defaultBg, Math.random() + 0.1),
     };
   }
 

@@ -54,7 +54,7 @@ function App() {
         <Stack
           sx={{
             height: "100dvh",
-            flexGrow: 1,
+            flex: "1 1 1px",
             alignContent: "stretch",
             background:
               "conic-gradient(#666 25%, #585858 0 50%, #666 0 75%, #585858 0) 0 0/25px 25px",
