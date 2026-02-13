@@ -93,3 +93,15 @@ export const deleteKeys = (
 
   return result;
 };
+
+export async function saveObjectToClipboard(data: any): Promise<void> {
+  try {
+    const jsonString = JSON.stringify(data, null, 2);
+    await navigator.clipboard.writeText(jsonString);
+    alert("Theme options copied to clipboard");
+  } catch (error) {
+    alert("Failed to copy theme to clipboard");
+    console.error(error);
+    throw error;
+  }
+}

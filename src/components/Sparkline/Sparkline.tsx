@@ -1,13 +1,6 @@
 import { Box, Stack, Typography, useTheme } from "@mui/material";
-import {
-  areaElementClasses,
-  chartsAxisHighlightClasses,
-  lineElementClasses,
-} from "@mui/x-charts";
-import {
-  SparkLineChart,
-  type SparkLineChartProps,
-} from "@mui/x-charts/SparkLineChart";
+import { areaElementClasses, chartsAxisHighlightClasses, lineElementClasses } from "@mui/x-charts";
+import { SparkLineChart, type SparkLineChartProps } from "@mui/x-charts/SparkLineChart";
 import { useState, type ReactNode } from "react";
 
 interface datum {
@@ -618,15 +611,7 @@ const settings: Partial<SparkLineChartProps> = {
   axisHighlight: { x: "line" },
 };
 
-export const Sparkline = ({
-  title,
-  data,
-  icon,
-}: {
-  title: string;
-  data: Array<datum>;
-  icon: ReactNode;
-}) => {
+export const Sparkline = ({ title, data, icon }: { title: string; data: Array<datum>; icon: ReactNode }) => {
   const [weekIndex, setWeekIndex] = useState<null | number>(null);
   const { palette } = useTheme();
 
@@ -636,32 +621,16 @@ export const Sparkline = ({
   const color = isIncreasing ? "success" : "error";
 
   return (
-    <Box
-      width="100%"
-      display="flex"
-      justifyContent="center"
-      alignItems="center"
-    >
+    <Box width="100%" display="flex" justifyContent="center" alignItems="center">
       <Stack direction="column" width="100%">
-        <Stack
-          direction="row"
-          alignItems="flex-start"
-          gap={1}
-          alignContent="center"
-        >
+        <Stack direction="row" alignItems="flex-start" gap={1} alignContent="center">
           {icon}
           <Typography variant="subtitle2" lineHeight={1.5}>
             {title}
           </Typography>
         </Stack>
 
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="flex-end"
-          gap={2}
-          sx={{ containerType: "inline-size" }}
-        >
+        <Stack direction="row" justifyContent="space-between" alignItems="flex-end" gap={2} sx={{ containerType: "inline-size" }}>
           <Typography variant="h6" color="textSecondary">
             {downloads[weekIndex ?? downloads.length - 1].toLocaleString()}
           </Typography>
@@ -696,11 +665,7 @@ export const Sparkline = ({
                   strokeWidth: 2,
                 },
               }}
-              highlightedAxis={
-                weekIndex === null
-                  ? []
-                  : [{ axisId: "week-axis", dataIndex: weekIndex }]
-              }
+              highlightedAxis={weekIndex === null ? [] : [{ axisId: "week-axis", dataIndex: weekIndex }]}
               {...settings}
             />
           </Box>

@@ -26,12 +26,7 @@ export const EditorPanel = () => {
           }}
         >
           {BUTTON_DATA.map(({ name, icon }) => (
-            <Button
-              key={name}
-              variant={section === name ? "contained" : "outlined"}
-              onClick={() => setSection(name)}
-              sx={{ py: 1 }}
-            >
+            <Button key={name} variant={section === name ? "contained" : "outlined"} onClick={() => setSection(name)} sx={{ py: 1 }}>
               <Stack alignItems="center" gap={1}>
                 {icon}
                 <Stack height={24} sx={{ placeContent: "center" }}>

@@ -117,7 +117,7 @@ export const MockApp = () => {
       <AppBar position="sticky">
         <Toolbar sx={{ containerType: "inline-size" }}>
           <Typography component="h1" variant="h6" sx={{ flexGrow: 1 }}>
-            OrderTracker Pro
+            OrderTrak Pro
           </Typography>
           <TextField
             sx={{

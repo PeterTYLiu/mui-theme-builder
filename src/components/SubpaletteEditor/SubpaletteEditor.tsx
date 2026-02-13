@@ -1,9 +1,4 @@
-import {
-  Box,
-  Button,
-  type PaletteOptions,
-  type SimplePaletteColorOptions,
-} from "@mui/material";
+import { Box, Button, type PaletteOptions, type SimplePaletteColorOptions } from "@mui/material";
 import { useState } from "react";
 import { DEFAULT_DARK_THEME, DEFAULT_THEME } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
@@ -22,13 +17,8 @@ interface SubpaletteEditorProps {
   derived: Array<keyof SimplePaletteColorOptions>;
 }
 
-export const SubpaletteEditor = ({
-  name,
-  manual,
-  derived,
-}: SubpaletteEditorProps) => {
-  const { theme, themeOptions, mergeThemeOptions, deleteThemeOptionKey } =
-    useInnerTheme();
+export const SubpaletteEditor = ({ name, manual, derived }: SubpaletteEditorProps) => {
+  const { theme, themeOptions, mergeThemeOptions, deleteThemeOptionKey } = useInnerTheme();
   const mode = theme.palette.mode;
   const [showDerived, setShowDerived] = useState(false);
 
@@ -37,12 +27,7 @@ export const SubpaletteEditor = ({
       title={name}
       actions={
         derived.length > 0 ? (
-          <Button
-            size="small"
-            color="secondary"
-            sx={{ p: 0 }}
-            onClick={() => setShowDerived((prev) => !prev)}
-          >
+          <Button size="small" color="secondary" sx={{ p: 0 }} onClick={() => setShowDerived((prev) => !prev)}>
             {showDerived ? "Hide derived" : "See derived"}
           </Button>
         ) : undefined

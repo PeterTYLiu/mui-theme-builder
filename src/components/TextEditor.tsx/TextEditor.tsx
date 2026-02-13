@@ -1,12 +1,4 @@
-import {
-  Autocomplete,
-  Box,
-  FormHelperText,
-  Link,
-  Slider,
-  TextField,
-  type TypographyVariants,
-} from "@mui/material";
+import { Autocomplete, Box, FormHelperText, Link, Slider, TextField, Typography, type TypographyVariants } from "@mui/material";
 import { DEFAULT_THEME } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { FieldContainer } from "../FieldContainer/FieldContainer";
@@ -60,36 +52,26 @@ export const EXAMPLE_GOOGLE_FONTS = [
   "Tenor Sans",
 ];
 
-const LOWER_CASE_FONTS = [DEFAULT_FONT, "", ...WEB_SAFE_FONTS].map((font) =>
-  font.toLowerCase(),
-);
+const LOWER_CASE_FONTS = [DEFAULT_FONT, "", ...WEB_SAFE_FONTS].map((font) => font.toLowerCase());
 
 export const TextEditor = () => {
   const { theme, mergeThemeOptions, deleteThemeOptionKey } = useInnerTheme();
   const currentFont = theme.typography.fontFamily;
-  const isGoogleFont = !LOWER_CASE_FONTS.includes(
-    currentFont?.toLowerCase() ?? "",
-  );
+  const isGoogleFont = !LOWER_CASE_FONTS.includes(currentFont?.toLowerCase() ?? "");
   // Need to deduplicate weights otherwise the Google Fonts <link> will not work
-  const currentWeights = Array.from(
-    new Set(WEIGHTS.map((weight) => theme.typography[weight.name] as number)),
-  );
+  const currentWeights = Array.from(new Set(WEIGHTS.map((weight) => theme.typography[weight.name] as number)));
 
   return (
     <>
       <FieldGroupContainer title="Text Size">
         <NumberSpecifier
           unit="px"
-          isDefault={
-            theme.typography.fontSize === DEFAULT_THEME.typography.fontSize
-          }
+          isDefault={theme.typography.fontSize === DEFAULT_THEME.typography.fontSize}
           min={8}
           max={24}
           step={0.5}
           value={theme.typography.fontSize}
-          onChange={(num) =>
-            mergeThemeOptions({ typography: { fontSize: num } })
-          }
+          onChange={(num) => mergeThemeOptions({ typography: { fontSize: num } })}
           onReset={() => deleteThemeOptionKey(["typography", "fontSize"])}
         />
       </FieldGroupContainer>
@@ -111,12 +93,7 @@ export const TextEditor = () => {
           disableClearable={currentFont === DEFAULT_FONT}
           options={[DEFAULT_FONT, ...WEB_SAFE_FONTS, ...EXAMPLE_GOOGLE_FONTS]}
           groupBy={(option) => {
-            if (
-              WEB_SAFE_FONTS.some(
-                (font) => font.toLowerCase() === option.toLowerCase(),
-              )
-            )
-              return "Web-safe fonts";
+            if (WEB_SAFE_FONTS.some((font) => font.toLowerCase() === option.toLowerCase())) return "Web-safe fonts";
             else if (option === DEFAULT_FONT) {
               return "Default";
             } else {
@@ -194,6 +171,11 @@ export const TextEditor = () => {
             </FieldContainer>
           );
         })}
+      </FieldGroupContainer>
+      <FieldGroupContainer>
+        <Typography variant="subtitle2" sx={{ textAlign: "center", color: "text.secondary" }}>
+          Individual variant editing coming soon
+        </Typography>
       </FieldGroupContainer>
     </>
   );

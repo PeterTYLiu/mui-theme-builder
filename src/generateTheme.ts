@@ -1,9 +1,6 @@
 import { type ThemeOptions, hslToRgb, lighten } from "@mui/material";
 import { random, sample } from "lodash";
-import {
-  EXAMPLE_GOOGLE_FONTS,
-  WEB_SAFE_FONTS,
-} from "./components/TextEditor.tsx/TextEditor";
+import { EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "./components/TextEditor.tsx/TextEditor";
 import { toStandardHex } from "./utils";
 
 const POSSIBLE_FONTS = [...WEB_SAFE_FONTS, ...EXAMPLE_GOOGLE_FONTS];
@@ -17,14 +14,10 @@ const generateRandomPrimaryAndSecondaryColor = (): {
   const hue = random(0, 360, false);
   const saturation = random(40, 100, false);
   const lightness = random(35, 80, false);
-  const primary = toStandardHex(
-    hslToRgb(`hsl(${hue},${saturation},${lightness})`),
-  );
+  const primary = toStandardHex(hslToRgb(`hsl(${hue},${saturation},${lightness})`));
 
   const secondaryHue = hue + diff > 360 ? hue - diff : hue + diff;
-  const secondary = toStandardHex(
-    hslToRgb(`hsl(${secondaryHue},${saturation},${lightness})`),
-  );
+  const secondary = toStandardHex(hslToRgb(`hsl(${secondaryHue},${saturation},${lightness})`));
 
   return { primary, secondary };
 };

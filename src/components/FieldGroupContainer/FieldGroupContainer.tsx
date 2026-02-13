@@ -7,11 +7,7 @@ export interface FieldGroupContainerProps {
   actions?: ReactNode;
 }
 
-export const FieldGroupContainer = ({
-  title,
-  actions,
-  children,
-}: PropsWithChildren<FieldGroupContainerProps>) => {
+export const FieldGroupContainer = ({ title, actions, children }: PropsWithChildren<FieldGroupContainerProps>) => {
   const hasHeader = Boolean(title || actions);
 
   return (
@@ -32,11 +28,7 @@ export const FieldGroupContainer = ({
           }}
         >
           {Boolean(title) && (
-            <Typography
-              variant="subtitle1"
-              component="h3"
-              sx={{ lineHeight: "initial", textTransform: "uppercase" }}
-            >
+            <Typography variant="subtitle1" component="h3" sx={{ lineHeight: "initial", textTransform: "uppercase" }}>
               {title}
             </Typography>
           )}

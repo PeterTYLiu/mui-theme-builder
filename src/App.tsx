@@ -1,10 +1,14 @@
+import { Refresh, Save } from "@mui/icons-material";
+
 import {
   Box,
   Button,
+  createTheme,
+  IconButton,
   Paper,
   Stack,
   ThemeProvider,
-  createTheme,
+  Tooltip,
   type ThemeOptions,
 } from "@mui/material";
 import { merge } from "lodash";
@@ -14,7 +18,7 @@ import { MockApp } from "./components/MockApp/MockApp";
 import { ToolsPanel } from "./components/ToolsPanel/ToolsPanel";
 import { generateTheme } from "./generateTheme";
 import { InnerThemeContext } from "./hooks/useInnerTheme";
-import { deleteKeys } from "./utils";
+import { deleteKeys, saveObjectToClipboard } from "./utils";
 
 function App() {
   const [themeOptions, setThemeOptions] = useState<ThemeOptions>({});
@@ -75,14 +79,53 @@ function App() {
             </ThemeProvider>
           </Box>
           <Stack gap={2} p={4} pt={0} alignItems="center">
-            <Stack gap={1} direction="row">
+            <Stack gap={1.5} direction="row">
+              <Tooltip title="Reset">
+                <IconButton
+                  disabled={Object.keys(themeOptions).length === 0}
+                  onClick={() => setThemeOptions({})}
+                  size="large"
+                  sx={{
+                    borderRadius: 1,
+                    bgcolor: "primary.main",
+                    "&:hover": { bgcolor: "primary.dark" },
+                    "&:disabled": { bgcolor: "primary.main", opacity: 0.5 },
+                    color: "primary.contrastText",
+                  }}
+                >
+                  <Refresh />
+                </IconButton>
+              </Tooltip>
               <Button
                 size="large"
+                variant="contained"
                 onClick={() => setThemeOptions(generateTheme())}
+                sx={{
+                  border: "2px solid transparent",
+                  borderImage:
+                    "conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red) 1",
+                  borderImageSlice: 1,
+                  transition: "all 0.3s ease",
+                }}
               >
                 Randomize!
               </Button>
-              <Button size="large">Save</Button>
+              <Tooltip title="Save">
+                <IconButton
+                  disabled={Object.keys(themeOptions).length === 0}
+                  size="large"
+                  onClick={() => saveObjectToClipboard(themeOptions)}
+                  sx={{
+                    borderRadius: 1,
+                    bgcolor: "primary.main",
+                    "&:hover": { bgcolor: "primary.dark" },
+                    "&:disabled": { bgcolor: "primary.main", opacity: 0.5 },
+                    color: "primary.contrastText",
+                  }}
+                >
+                  <Save />
+                </IconButton>
+              </Tooltip>
             </Stack>
           </Stack>
         </Stack>

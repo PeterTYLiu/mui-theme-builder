@@ -14,12 +14,7 @@ export const ToolsPanel = () => {
         flexDirection: "column",
       }}
     >
-      <Tabs
-        variant="fullWidth"
-        onChange={(_, value) => setTab(value)}
-        value={tab}
-        sx={{ borderBottom: 1, borderColor: DIVIDER_COLOR }}
-      >
+      <Tabs variant="fullWidth" onChange={(_, value) => setTab(value)} value={tab} sx={{ borderBottom: 1, borderColor: DIVIDER_COLOR }}>
         <Tab label="Editor" value="editor" iconPosition="top" />
         <Tab label="Code" value="code" iconPosition="top" />
       </Tabs>
