@@ -1,4 +1,17 @@
-import { Autocomplete, Box, FormHelperText, Link, Slider, TextField, Typography, type TypographyVariants } from "@mui/material";
+import { Add, Remove } from "@mui/icons-material";
+import {
+  Autocomplete,
+  Box,
+  Button,
+  ButtonGroup,
+  FormHelperText,
+  Link,
+  Slider,
+  TextField,
+  Tooltip,
+  Typography,
+  type TypographyVariants,
+} from "@mui/material";
 import { DEFAULT_THEME } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { FieldContainer } from "../FieldContainer/FieldContainer";
@@ -60,6 +73,8 @@ export const TextEditor = () => {
   const isGoogleFont = !LOWER_CASE_FONTS.includes(currentFont?.toLowerCase() ?? "");
   // Need to deduplicate weights otherwise the Google Fonts <link> will not work
   const currentWeights = Array.from(new Set(WEIGHTS.map((weight) => theme.typography[weight.name] as number)));
+  const isLowestWeight = currentWeights.length === 1 && currentWeights[0] === 100;
+  const isHighestWeight = currentWeights.length === 1 && currentWeights[0] === 900;
 
   return (
     <>
@@ -125,6 +140,8 @@ export const TextEditor = () => {
           <Box
             component="pre"
             sx={{
+              m: 0,
+              mt: 2,
               border: 1,
               p: 1,
               overflow: "auto",
@@ -142,7 +159,45 @@ export const TextEditor = () => {
           </Box>
         )}
       </FieldGroupContainer>
-      <FieldGroupContainer title="Font Weights">
+      <FieldGroupContainer
+        title="Font Weights"
+        actions={
+          <ButtonGroup size="small" color="secondary">
+            <Tooltip title="Decrease size">
+              <Button
+                disabled={isLowestWeight}
+                onClick={() => {
+                  const newWeightMap: Partial<Record<string, number>> = {};
+                  WEIGHTS.forEach(({ name }) => {
+                    const currentWeight = theme.typography[name] as number;
+                    const newWeight = Math.max(currentWeight - 100, 100);
+                    newWeightMap[name] = newWeight;
+                  });
+                  mergeThemeOptions({ typography: newWeightMap });
+                }}
+              >
+                <Remove />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Increase size">
+              <Button
+                disabled={isHighestWeight}
+                onClick={() => {
+                  const newWeightMap: Partial<Record<string, number>> = {};
+                  WEIGHTS.forEach(({ name }) => {
+                    const currentWeight = theme.typography[name] as number;
+                    const newWeight = Math.min(currentWeight + 100, 900);
+                    newWeightMap[name] = newWeight;
+                  });
+                  mergeThemeOptions({ typography: newWeightMap });
+                }}
+              >
+                <Add />
+              </Button>
+            </Tooltip>
+          </ButtonGroup>
+        }
+      >
         {WEIGHTS.map(({ name, defaultWeight }) => {
           const currentWeight = theme.typography[name] as number;
           return (

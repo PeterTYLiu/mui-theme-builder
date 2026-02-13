@@ -1,13 +1,4 @@
-import {
-  AccountCircle,
-  AcUnitSharp,
-  Add,
-  GasMeterRounded,
-  Notifications,
-  Search,
-  TrackChanges,
-  Upgrade,
-} from "@mui/icons-material";
+import { AccountCircle, AcUnitSharp, Add, GasMeterRounded, Notifications, Search, TrackChanges, Upgrade } from "@mui/icons-material";
 import {
   Alert,
   AppBar,
@@ -31,15 +22,11 @@ import {
   TableRow,
   TextField,
   Toolbar,
+  Tooltip,
   Typography,
   type ChipProps,
 } from "@mui/material";
-import {
-  FAKE_DATA_1,
-  FAKE_DATA_2,
-  FAKE_DATA_3,
-  Sparkline,
-} from "../Sparkline/Sparkline";
+import { FAKE_DATA_1, FAKE_DATA_2, FAKE_DATA_3, Sparkline } from "../Sparkline/Sparkline";
 
 interface Order {
   id: string;
@@ -135,21 +122,23 @@ export const MockApp = () => {
             placeholder="Search..."
             variant="outlined"
           />
-          <IconButton
-            size="large"
-            color="inherit"
-            sx={{ display: { "@650": "none" } }}
-          >
-            <Search />
-          </IconButton>
-          <IconButton size="large" color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <Notifications />
-            </Badge>
-          </IconButton>
-          <IconButton size="large" color="inherit">
-            <AccountCircle />
-          </IconButton>
+          <Tooltip title="Search">
+            <IconButton size="large" color="inherit" sx={{ display: { "@650": "none" } }}>
+              <Search />
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="Notifications (4)">
+            <IconButton size="large" color="inherit">
+              <Badge badgeContent={4} color="secondary">
+                <Notifications />
+              </Badge>
+            </IconButton>
+          </Tooltip>
+          <Tooltip title="My Account">
+            <IconButton size="large" color="inherit">
+              <AccountCircle />
+            </IconButton>
+          </Tooltip>
         </Toolbar>
       </AppBar>
       <Box sx={{ p: 2 }}>
@@ -236,9 +225,7 @@ export const MockApp = () => {
                           }}
                           src={`https://picsum.photos/seed/${index * data.driverName.length}/64`}
                         />
-                        <Typography sx={{ lineHeight: 1 }}>
-                          {data.driverName}
-                        </Typography>
+                        <Typography sx={{ lineHeight: 1 }}>{data.driverName}</Typography>
                       </Stack>
                     </TableCell>
                     <TableCell>
@@ -250,10 +237,7 @@ export const MockApp = () => {
                       </Box>
                     </TableCell>
                     <TableCell>
-                      <Chip
-                        color={STATUS_TO_COLOR_MAP[data.status]}
-                        label={data.status}
-                      />
+                      <Chip color={STATUS_TO_COLOR_MAP[data.status]} label={data.status} />
                     </TableCell>
                   </TableRow>
                 ))}
@@ -261,13 +245,7 @@ export const MockApp = () => {
             </Table>
           </TableContainer>
           <Paper sx={{ p: 2, flex: "1 1 250px" }}>
-            <Stack
-              direction="row"
-              justifyContent="space-between"
-              alignItems="center"
-              gap={2}
-              mb={1.5}
-            >
+            <Stack direction="row" justifyContent="space-between" alignItems="center" gap={2} mb={1.5}>
               <Typography fontWeight="bold">Analytics</Typography>
               <Select size="small" value={15}>
                 <MenuItem value={10}>Today</MenuItem>
@@ -288,21 +266,9 @@ export const MockApp = () => {
             </Box>
             <Divider />
             <Stack pt={1.5} gap={2}>
-              <Sparkline
-                title="Tracking events"
-                data={FAKE_DATA_1}
-                icon={<TrackChanges fontSize="small" />}
-              />
-              <Sparkline
-                title="Retention rate"
-                data={FAKE_DATA_2}
-                icon={<GasMeterRounded fontSize="small" />}
-              />
-              <Sparkline
-                title="Customer TTRs"
-                data={FAKE_DATA_3}
-                icon={<AcUnitSharp fontSize="small" />}
-              />
+              <Sparkline title="Tracking events" data={FAKE_DATA_1} icon={<TrackChanges fontSize="small" />} />
+              <Sparkline title="Retention rate" data={FAKE_DATA_2} icon={<GasMeterRounded fontSize="small" />} />
+              <Sparkline title="Customer TTRs" data={FAKE_DATA_3} icon={<AcUnitSharp fontSize="small" />} />
             </Stack>
           </Paper>
         </Box>
