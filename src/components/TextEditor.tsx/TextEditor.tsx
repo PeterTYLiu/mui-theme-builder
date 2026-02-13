@@ -12,6 +12,7 @@ import {
   Typography,
   type TypographyVariants,
 } from "@mui/material";
+import { useRef } from "react";
 import { DEFAULT_THEME } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { FieldContainer } from "../FieldContainer/FieldContainer";
@@ -69,12 +70,25 @@ const LOWER_CASE_FONTS = [DEFAULT_FONT, "", ...WEB_SAFE_FONTS].map((font) => fon
 
 export const TextEditor = () => {
   const { theme, mergeThemeOptions, deleteThemeOptionKey } = useInnerTheme();
+  const codeblockRef = useRef<HTMLPreElement | null>(null);
   const currentFont = theme.typography.fontFamily;
   const isGoogleFont = !LOWER_CASE_FONTS.includes(currentFont?.toLowerCase() ?? "");
   // Need to deduplicate weights otherwise the Google Fonts <link> will not work
   const currentWeights = Array.from(new Set(WEIGHTS.map((weight) => theme.typography[weight.name] as number)));
   const isLowestWeight = currentWeights.length === 1 && currentWeights[0] === 100;
   const isHighestWeight = currentWeights.length === 1 && currentWeights[0] === 900;
+  const copyCodeBlock = async () => {
+    if (!codeblockRef.current) return;
+    try {
+      const text = codeblockRef.current.innerText;
+      await navigator.clipboard.writeText(text);
+      alert("Snippet copied to clipboard");
+    } catch (error) {
+      alert("Failed to copy snippet to clipboard");
+      console.error(error);
+      throw error;
+    }
+  };
 
   return (
     <>
@@ -127,36 +141,48 @@ export const TextEditor = () => {
         {isGoogleFont && (
           <link
             rel="stylesheet"
-            href={`https://fonts.googleapis.com/css2?family=${currentFont}:wght@${currentWeights.join(";")}&display=swap`}
+            href={`https://fonts.googleapis.com/css2?family=${currentFont?.replaceAll(" ", "+")}:wght@${currentWeights.join(";")}&display=swap`}
           />
         )}
         <FormHelperText>
           Enter a web-safe font or{" "}
           <Link href="https://fonts.google.com/" target="_blank">
             Google Font
-          </Link>
+          </Link>{" "}
+          (case-sensitive)
         </FormHelperText>
         {isGoogleFont && (
-          <Box
-            component="pre"
-            sx={{
-              m: 0,
-              mt: 2,
-              border: 1,
-              p: 1,
-              overflow: "auto",
-              borderColor: "grey.700",
-              bgcolor: "background.default",
-            }}
-          >
-            {`// Copy into <head> to use this Google Font`}
-            <br />
-            {`<link rel="preconnect" href="https://fonts.googleapis.com" />`}
-            <br />
-            {`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`}
-            <br />
-            {`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${currentFont}:wght@${currentWeights.join(";")}&display=swap" />`}
-          </Box>
+          <>
+            <Typography sx={{ mt: 2, mb: 0.5 }}>
+              <Link component="button" onClick={copyCodeBlock}>
+                Copy this snippet
+              </Link>{" "}
+              to use{" "}
+              <Link target="_blank" href={"https://fonts.google.com/noto/specimen/" + currentFont?.replaceAll(" ", "+")}>
+                this Google Font
+              </Link>
+            </Typography>
+            <Box
+              component="pre"
+              ref={codeblockRef}
+              sx={{
+                m: 0,
+                border: 1,
+                p: 1,
+                overflow: "auto",
+                borderColor: "grey.700",
+                bgcolor: "background.default",
+              }}
+            >
+              {`<!-- Paste into <head> -->`}
+              <br />
+              {`<link rel="preconnect" href="https://fonts.googleapis.com" />`}
+              <br />
+              {`<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />`}
+              <br />
+              {`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${currentFont?.replaceAll(" ", "+")}:wght@${currentWeights.join(";")}&display=swap" />`}
+            </Box>
+          </>
         )}
       </FieldGroupContainer>
       <FieldGroupContainer
