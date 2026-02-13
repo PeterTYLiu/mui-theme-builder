@@ -1,14 +1,16 @@
-import { Refresh, Save } from "@mui/icons-material";
+import { Refresh, Save, Share } from "@mui/icons-material";
 
 import {
   Box,
   Button,
   createTheme,
   IconButton,
+  Link,
   Paper,
   Stack,
   ThemeProvider,
   Tooltip,
+  Typography,
   type ThemeOptions,
 } from "@mui/material";
 import { merge } from "lodash";
@@ -25,8 +27,7 @@ function App() {
   const innerTheme = createTheme(themeOptions);
   const mergeThemeOptions = (partialThemeOptions: ThemeOptions) =>
     setThemeOptions(merge(structuredClone(themeOptions), partialThemeOptions));
-  const deleteThemeOptionKey = (keyPath: Array<string>) =>
-    setThemeOptions(deleteKeys(themeOptions, keyPath));
+  const deleteThemeOptionKey = (keyPath: Array<string>) => setThemeOptions(deleteKeys(themeOptions, keyPath));
 
   return (
     <InnerThemeContext
@@ -60,8 +61,7 @@ function App() {
             height: "100dvh",
             flex: "1 1 1px",
             alignContent: "stretch",
-            background:
-              "conic-gradient(#666 25%, #585858 0 50%, #666 0 75%, #585858 0) 0 0/25px 25px",
+            background: "conic-gradient(#666 25%, #585858 0 50%, #666 0 75%, #585858 0) 0 0/25px 25px",
           }}
         >
           <Box
@@ -70,7 +70,7 @@ function App() {
               placeItems: "center",
               minHeight: 0,
               flexGrow: 1,
-              padding: 4,
+              padding: { xs: 2, sm: 3, md: 4 },
               pb: 3,
             }}
           >
@@ -78,32 +78,15 @@ function App() {
               <MockApp />
             </ThemeProvider>
           </Box>
-          <Stack gap={2} p={4} pt={0} alignItems="center">
+          <Stack gap={2} sx={{ p: { xs: 2, sm: 3, md: 4 }, pt: { xs: 0, sm: 0, md: 0 } }} alignItems="center">
             <Stack gap={1.5} direction="row">
-              <Tooltip title="Reset">
-                <IconButton
-                  disabled={Object.keys(themeOptions).length === 0}
-                  onClick={() => setThemeOptions({})}
-                  size="large"
-                  sx={{
-                    borderRadius: 1,
-                    bgcolor: "primary.main",
-                    "&:hover": { bgcolor: "primary.dark" },
-                    "&:disabled": { bgcolor: "primary.main", opacity: 0.5 },
-                    color: "primary.contrastText",
-                  }}
-                >
-                  <Refresh />
-                </IconButton>
-              </Tooltip>
               <Button
                 size="large"
                 variant="contained"
                 onClick={() => setThemeOptions(generateTheme())}
                 sx={{
                   border: "2px solid transparent",
-                  borderImage:
-                    "conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red) 1",
+                  borderImage: "conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red) 1",
                   borderImageSlice: 1,
                   transition: "all 0.3s ease",
                 }}
@@ -126,7 +109,47 @@ function App() {
                   <Save />
                 </IconButton>
               </Tooltip>
+              <Tooltip title="Reset">
+                <IconButton
+                  disabled={Object.keys(themeOptions).length === 0}
+                  onClick={() => {
+                    if (!confirm("Reset all settings to default?")) return;
+                    setThemeOptions({});
+                  }}
+                  size="large"
+                  sx={{
+                    borderRadius: 1,
+                    bgcolor: "primary.main",
+                    "&:hover": { bgcolor: "primary.dark" },
+                    "&:disabled": { bgcolor: "primary.main", opacity: 0.5 },
+                    color: "primary.contrastText",
+                  }}
+                >
+                  <Refresh />
+                </IconButton>
+              </Tooltip>
+              <Tooltip title={Object.keys(themeOptions).length === 0 ? "Share" : "Share this theme"}>
+                <IconButton
+                  onClick={() => {}}
+                  size="large"
+                  sx={{
+                    borderRadius: 1,
+                    bgcolor: "primary.main",
+                    "&:hover": { bgcolor: "primary.dark" },
+                    "&:disabled": { bgcolor: "primary.main", opacity: 0.5 },
+                    color: "primary.contrastText",
+                  }}
+                >
+                  <Share />
+                </IconButton>
+              </Tooltip>
             </Stack>
+            <Typography color="#ddd" sx={{ display: { sm: "none" } }}>
+              View on a larger screen to edit&nbsp;&nbsp;|&nbsp;&nbsp;
+              <Link href="https://github.com/PeterTYLiu/mui-theme-builder" target="_blank">
+                Github
+              </Link>
+            </Typography>
           </Stack>
         </Stack>
         <ToolsPanel />

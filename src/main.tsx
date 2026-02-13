@@ -18,6 +18,7 @@ createRoot(document.getElementById("root")!).render(
         components: {
           MuiButtonBase: { defaultProps: { disableRipple: true } },
           MuiToggleButtonGroup: { defaultProps: { size: "small" } },
+          MuiTooltip: { styleOverrides: { tooltip: { fontSize: "13px" } } },
         },
       })}
     >
