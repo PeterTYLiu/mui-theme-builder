@@ -12,6 +12,7 @@ import { useState } from "react";
 import "./App.css";
 import { MockApp } from "./components/MockApp/MockApp";
 import { ToolsPanel } from "./components/ToolsPanel/ToolsPanel";
+import { generateTheme } from "./generateTheme";
 import { InnerThemeContext } from "./hooks/useInnerTheme";
 import { deleteKeys } from "./utils";
 
@@ -75,7 +76,12 @@ function App() {
           </Box>
           <Stack gap={2} p={4} pt={0} alignItems="center">
             <Stack gap={1} direction="row">
-              <Button size="large">Randomize!</Button>
+              <Button
+                size="large"
+                onClick={() => setThemeOptions(generateTheme())}
+              >
+                Randomize!
+              </Button>
               <Button size="large">Save</Button>
             </Stack>
           </Stack>

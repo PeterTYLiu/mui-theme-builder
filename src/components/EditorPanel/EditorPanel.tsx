@@ -1,6 +1,6 @@
 import { ColorLens, RoundedCorner, TextFields } from "@mui/icons-material";
 import { Box, Button, Stack, Typography } from "@mui/material";
-import { useState, type ReactNode } from "react";
+import { Activity, useState, type ReactNode } from "react";
 import { FieldGroupContainer } from "../FieldGroupContainer/FieldGroupContainer";
 import { PaletteEditor } from "../PaletteEditor/PaletteEditor";
 import { ShapeEditor } from "../ShapeEditor/ShapeEditor";
@@ -51,9 +51,15 @@ export const EditorPanel = () => {
         </Box>
       </FieldGroupContainer>
       <Box sx={{ flex: "0px 1 1", overflowY: "scroll" }}>
-        {section === "colors" && <PaletteEditor />}
-        {section === "shape & spacing" && <ShapeEditor />}
-        {section === "text" && <TextEditor />}
+        <Activity mode={section === "colors" ? "visible" : "hidden"}>
+          <PaletteEditor />
+        </Activity>
+        <Activity mode={section === "shape & spacing" ? "visible" : "hidden"}>
+          <ShapeEditor />
+        </Activity>
+        <Activity mode={section === "text" ? "visible" : "hidden"}>
+          <TextEditor />
+        </Activity>
       </Box>
     </Box>
   );

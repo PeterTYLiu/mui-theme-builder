@@ -1,11 +1,18 @@
 import { Refresh } from "@mui/icons-material";
-import { Box, IconButton, Tooltip, Typography } from "@mui/material";
+import {
+  Box,
+  IconButton,
+  Tooltip,
+  Typography,
+  type SxProps,
+} from "@mui/material";
 import type { PropsWithChildren } from "react";
 
 export interface FieldContainerProps {
   title?: string;
   isDefault: boolean;
   onReset: () => void;
+  titleSx?: SxProps;
 }
 
 export const FieldContainer = ({
@@ -13,6 +20,7 @@ export const FieldContainer = ({
   children,
   isDefault,
   onReset,
+  titleSx,
 }: PropsWithChildren<FieldContainerProps>) => {
   return (
     <Box
@@ -26,7 +34,6 @@ export const FieldContainer = ({
       {Boolean(title) && (
         <Box
           sx={{
-            width: "90px",
             flexShrink: 0,
             flexGrow: 1,
             display: "flex",
@@ -38,6 +45,7 @@ export const FieldContainer = ({
             textTransform="capitalize"
             variant="subtitle2"
             color="textSecondary"
+            sx={titleSx}
           >
             {title}
           </Typography>

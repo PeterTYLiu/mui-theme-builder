@@ -91,6 +91,5 @@ export const deleteKeys = (
   // Perform the deletion
   deleteAtPath(result, keys);
 
-  console.log(result);
   return result;
 };

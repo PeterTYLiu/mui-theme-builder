@@ -8,7 +8,7 @@ export const ToolsPanel = () => {
   return (
     <Paper
       sx={{
-        width: "310px",
+        width: "300px",
         display: { xs: "none", sm: "flex" },
         flexShrink: 0,
         flexDirection: "column",

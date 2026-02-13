@@ -135,6 +135,8 @@ export const MockApp = () => {
           direction="row"
           sx={{
             justifyContent: "space-between",
+            flexWrap: "wrap",
+            gap: 2,
             alignItems: "center",
             mb: 2,
           }}
