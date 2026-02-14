@@ -1,21 +1,10 @@
-import { Refresh, Save, Share } from "@mui/icons-material";
+import { GetApp, Refresh, Share } from "@mui/icons-material";
 
-import {
-  Box,
-  Button,
-  createTheme,
-  IconButton,
-  Link,
-  Paper,
-  Stack,
-  ThemeProvider,
-  Tooltip,
-  Typography,
-  type ThemeOptions,
-} from "@mui/material";
+import { Box, Button, createTheme, IconButton, Link, Stack, ThemeProvider, Tooltip, Typography, type ThemeOptions } from "@mui/material";
 import { merge } from "lodash";
 import { useEffect, useState } from "react";
 import "./App.css";
+import { InfoPanel } from "./components/InfoPanel/InfoPanel";
 import { MockApp } from "./components/MockApp/MockApp";
 import { ToolsPanel } from "./components/ToolsPanel/ToolsPanel";
 import { generateTheme } from "./generateTheme";
@@ -54,14 +43,7 @@ function App() {
           height: "100dvh",
         }}
       >
-        <Paper
-          sx={{
-            display: { xs: "none", sm: "flex" },
-            flex: "0 0 200px",
-          }}
-        >
-          Hello
-        </Paper>
+        <InfoPanel />
         <Stack
           sx={{
             height: "100dvh",
@@ -100,7 +82,7 @@ function App() {
               >
                 Randomize!
               </Button>
-              <Tooltip title="Save">
+              <Tooltip title="Export theme">
                 <IconButton
                   disabled={Object.keys(themeOptions).length === 0}
                   size="large"
@@ -113,7 +95,7 @@ function App() {
                     color: "primary.contrastText",
                   }}
                 >
-                  <Save />
+                  <GetApp />
                 </IconButton>
               </Tooltip>
               <Tooltip title="Reset">

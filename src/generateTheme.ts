@@ -1,4 +1,4 @@
-import { type ThemeOptions, hslToRgb, lighten } from "@mui/material";
+import { type ThemeOptions, hslToRgb, lighten, rgbToHex } from "@mui/material";
 import { random, sample } from "lodash";
 import { EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "./components/TextEditor.tsx/TextEditor";
 import { toStandardHex } from "./utils";
@@ -68,7 +68,7 @@ export const generateTheme = (): ThemeOptions => {
     const defaultBg = generateRandomLightBgColor();
     newThemeOptions.palette!.background = {
       default: defaultBg,
-      paper: lighten(defaultBg, Math.random() + 0.1),
+      paper: rgbToHex(lighten(defaultBg, Math.random() + 0.1)),
     };
   }
 
