@@ -14,7 +14,7 @@ import {
   type ThemeOptions,
 } from "@mui/material";
 import { merge } from "lodash";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import { MockApp } from "./components/MockApp/MockApp";
 import { ToolsPanel } from "./components/ToolsPanel/ToolsPanel";
@@ -22,12 +22,18 @@ import { generateTheme } from "./generateTheme";
 import { InnerThemeContext } from "./hooks/useInnerTheme";
 import { deleteKeys, saveObjectToClipboard } from "./utils";
 
+const LOCAL_STORAGE_KEY = "themeOptions";
+
 function App() {
-  const [themeOptions, setThemeOptions] = useState<ThemeOptions>({});
+  const [themeOptions, setThemeOptions] = useState<ThemeOptions>(JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY) ?? "{}"));
   const innerTheme = createTheme(themeOptions);
   const mergeThemeOptions = (partialThemeOptions: ThemeOptions) =>
     setThemeOptions(merge(structuredClone(themeOptions), partialThemeOptions));
   const deleteThemeOptionKey = (keyPath: Array<string>) => setThemeOptions(deleteKeys(themeOptions, keyPath));
+
+  useEffect(() => {
+    localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(themeOptions));
+  }, [themeOptions]);
 
   return (
     <InnerThemeContext
@@ -89,6 +95,7 @@ function App() {
                   borderImage: "conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red) 1",
                   borderImageSlice: 1,
                   transition: "all 0.3s ease",
+                  fontWeight: "bold",
                 }}
               >
                 Randomize!
