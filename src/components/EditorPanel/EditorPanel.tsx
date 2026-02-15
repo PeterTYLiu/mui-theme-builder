@@ -6,11 +6,11 @@ import { PaletteEditor } from "../PaletteEditor/PaletteEditor";
 import { ShapeEditor } from "../ShapeEditor/ShapeEditor";
 import { TextEditor } from "../TextEditor.tsx/TextEditor";
 
-type Section = "colors" | "text" | "shape & spacing";
+type Section = "colors" | "text" | "shape & space";
 const BUTTON_DATA: { name: Section; icon: ReactNode }[] = [
   { name: "colors", icon: <ColorLens /> },
   { name: "text", icon: <TextFields /> },
-  { name: "shape & spacing", icon: <RoundedCorner /> },
+  { name: "shape & space", icon: <RoundedCorner /> },
 ];
 
 export const EditorPanel = () => {
@@ -49,7 +49,7 @@ export const EditorPanel = () => {
         <Activity mode={section === "colors" ? "visible" : "hidden"}>
           <PaletteEditor />
         </Activity>
-        <Activity mode={section === "shape & spacing" ? "visible" : "hidden"}>
+        <Activity mode={section === "shape & space" ? "visible" : "hidden"}>
           <ShapeEditor />
         </Activity>
         <Activity mode={section === "text" ? "visible" : "hidden"}>

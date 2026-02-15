@@ -10,14 +10,14 @@ export const InfoPanel = () => {
         p: 2,
       }}
     >
-      <Typography variant="h4">
+      <Typography variant="h4" sx={{ lineHeight: 1.1 }}>
         MUI
         <br />
-        THEME
+        Theme
         <br />
-        BUILDER
+        Builder
       </Typography>
-      <Typography>By Peter Liu</Typography>
+      <Typography color="textSecondary">By Peter Liu</Typography>
       <Tooltip title="Github">
         <IconButton size="large" href="https://github.com/PeterTYLiu/mui-theme-builder" target="_blank">
           <GitHub fontSize="medium" />

@@ -64,6 +64,15 @@ export const EXAMPLE_GOOGLE_FONTS = [
   "Lexend",
   "Marcellus",
   "Tenor Sans",
+  "Dosis",
+  "Sora",
+  "Fredoka",
+  "Play",
+  "Geologica",
+  "League Spartan",
+  "Geist Mono",
+  "SUSE",
+  "Overlock",
 ];
 
 const LOWER_CASE_FONTS = [DEFAULT_FONT, "", ...WEB_SAFE_FONTS].map((font) => font.toLowerCase());
@@ -153,7 +162,7 @@ export const TextEditor = () => {
         </FormHelperText>
         {isGoogleFont && (
           <>
-            <Typography sx={{ mt: 2, mb: 0.5 }}>
+            <Typography variant="subtitle2" sx={{ mt: 2, mb: 0.5 }}>
               <Link component="button" onClick={copyCodeBlock}>
                 Copy this snippet
               </Link>{" "}
@@ -174,7 +183,7 @@ export const TextEditor = () => {
                 bgcolor: "background.default",
               }}
             >
-              {`<!-- Paste into <head> -->`}
+              <span style={{ color: "#52c824" }}>{`<!-- Paste into <head> -->`}</span>
               <br />
               {`<link rel="preconnect" href="https://fonts.googleapis.com" />`}
               <br />
@@ -189,7 +198,7 @@ export const TextEditor = () => {
         title="Font Weights"
         actions={
           <ButtonGroup size="small" color="secondary">
-            <Tooltip title="Decrease size">
+            <Tooltip title="Decrease weight">
               <Button
                 disabled={isLowestWeight}
                 onClick={() => {
@@ -205,7 +214,7 @@ export const TextEditor = () => {
                 <Remove />
               </Button>
             </Tooltip>
-            <Tooltip title="Increase size">
+            <Tooltip title="Increase weight">
               <Button
                 disabled={isHighestWeight}
                 onClick={() => {
