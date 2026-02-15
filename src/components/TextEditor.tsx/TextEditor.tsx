@@ -1,4 +1,4 @@
-import { Add, Remove } from "@mui/icons-material";
+import { Add, Refresh, Remove } from "@mui/icons-material";
 import {
   Autocomplete,
   Box,
@@ -15,6 +15,7 @@ import {
 import { useRef } from "react";
 import { DEFAULT_THEME } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
+import { deleteKeys } from "../../utils";
 import { FieldContainer } from "../FieldContainer/FieldContainer";
 import { FieldGroupContainer } from "../FieldGroupContainer/FieldGroupContainer";
 import { NumberSpecifier } from "../NumberSpecifier/NumberSpecifier";
@@ -78,7 +79,7 @@ export const EXAMPLE_GOOGLE_FONTS = [
 const LOWER_CASE_FONTS = [DEFAULT_FONT, "", ...WEB_SAFE_FONTS].map((font) => font.toLowerCase());
 
 export const TextEditor = () => {
-  const { theme, mergeThemeOptions, deleteThemeOptionKey } = useInnerTheme();
+  const { theme, themeOptions, setThemeOptions, mergeThemeOptions, deleteThemeOptionKey } = useInnerTheme();
   const codeblockRef = useRef<HTMLPreElement | null>(null);
   const currentFont = theme.typography.fontFamily;
   const isGoogleFont = !LOWER_CASE_FONTS.includes(currentFont?.toLowerCase() ?? "");
@@ -86,6 +87,8 @@ export const TextEditor = () => {
   const currentWeights = Array.from(new Set(WEIGHTS.map((weight) => theme.typography[weight.name] as number)));
   const isLowestWeight = currentWeights.length === 1 && currentWeights[0] === 100;
   const isHighestWeight = currentWeights.length === 1 && currentWeights[0] === 900;
+  const isNotDefaultWeights = WEIGHTS.some(({ defaultWeight }, index) => defaultWeight !== currentWeights[index]);
+
   const copyCodeBlock = async () => {
     if (!codeblockRef.current) return;
     try {
@@ -198,7 +201,7 @@ export const TextEditor = () => {
         title="Font Weights"
         actions={
           <ButtonGroup size="small" color="secondary">
-            <Tooltip title="Decrease weight">
+            <Tooltip title="Decrease weights">
               <Button
                 disabled={isLowestWeight}
                 onClick={() => {
@@ -214,7 +217,7 @@ export const TextEditor = () => {
                 <Remove />
               </Button>
             </Tooltip>
-            <Tooltip title="Increase weight">
+            <Tooltip title="Increase weights">
               <Button
                 disabled={isHighestWeight}
                 onClick={() => {
@@ -228,6 +231,20 @@ export const TextEditor = () => {
                 }}
               >
                 <Add />
+              </Button>
+            </Tooltip>
+            <Tooltip title="Reset weights">
+              <Button
+                disabled={!isNotDefaultWeights}
+                onClick={() => {
+                  let newThemeOptions = themeOptions;
+                  WEIGHTS.forEach(({ name }) => {
+                    newThemeOptions = deleteKeys(newThemeOptions, ["typography", name]);
+                  });
+                  setThemeOptions(newThemeOptions);
+                }}
+              >
+                <Refresh />
               </Button>
             </Tooltip>
           </ButtonGroup>
