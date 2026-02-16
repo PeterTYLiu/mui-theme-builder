@@ -3,7 +3,6 @@ import { GetApp, Refresh, Share } from "@mui/icons-material";
 import { Box, Button, createTheme, IconButton, Link, Stack, ThemeProvider, Tooltip, Typography, type ThemeOptions } from "@mui/material";
 import { merge } from "lodash";
 import { useEffect, useState } from "react";
-import "./App.css";
 import { InfoPanel } from "./components/InfoPanel/InfoPanel";
 import { MockApp } from "./components/MockApp/MockApp";
 import { ToolsPanel } from "./components/ToolsPanel/ToolsPanel";

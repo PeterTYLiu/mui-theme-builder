@@ -1,6 +1,7 @@
 import { Paper, Tab, Tabs } from "@mui/material";
 import { Activity, useState } from "react";
 import { DIVIDER_COLOR } from "../../constants";
+import { CodePanel } from "../CodePanel/CodePanel";
 import { EditorPanel } from "../EditorPanel/EditorPanel";
 
 export const ToolsPanel = () => {
@@ -20,6 +21,9 @@ export const ToolsPanel = () => {
       </Tabs>
       <Activity mode={tab === "editor" ? "visible" : "hidden"}>
         <EditorPanel />
+      </Activity>
+      <Activity mode={tab === "code" ? "visible" : "hidden"}>
+        <CodePanel />
       </Activity>
     </Paper>
   );

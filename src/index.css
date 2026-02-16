@@ -11,3 +11,14 @@ body,
 * {
   box-sizing: border-box;
 }
+
+pre {
+  margin: 0;
+  overflow: scroll;
+  padding: 20px;
+  flex: 1 1 0px;
+  & span.line:last-child,
+  & span.line:first-child {
+    opacity: 0.4;
+  }
+}
