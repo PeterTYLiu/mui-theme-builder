@@ -5,9 +5,6 @@ import {
   createTheme,
   IconButton,
   Link,
-  MenuItem,
-  MenuList,
-  Paper,
   Stack,
   ThemeProvider,
   Tooltip,
@@ -143,7 +140,12 @@ function App() {
                   <Refresh />
                 </IconButton>
               </Tooltip>
-              <Tooltip title={hasEditedTheme ? "Share..." : "Share"}>
+              <Tooltip title="Share">
+                <IconButton onClick={shareSite} {...SHARED_ICONBUTTON_PROPS}>
+                  <Share />
+                </IconButton>
+              </Tooltip>
+              {/* <Tooltip title={hasEditedTheme ? "Share..." : "Share"}>
                 <IconButton
                   {...(hasEditedTheme ? { popoverTarget: "share-popover" } : { onClick: shareSite })}
                   {...SHARED_ICONBUTTON_PROPS}
@@ -162,7 +164,7 @@ function App() {
                     <MenuItem onClick={() => {}}>Share this theme</MenuItem>
                   </MenuList>
                 </Paper>
-              )}
+              )} */}
             </Stack>
             <Typography color="#ddd" sx={{ display: { sm: "none" } }}>
               View on a larger screen to edit&nbsp;&nbsp;|&nbsp;&nbsp;
