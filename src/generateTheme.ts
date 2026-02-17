@@ -1,4 +1,4 @@
-import { type ThemeOptions, hslToRgb, lighten, rgbToHex } from "@mui/material";
+import { hslToRgb, lighten, rgbToHex, type ThemeOptions, type TypographyVariantsOptions } from "@mui/material";
 import { random, sample } from "lodash";
 import { EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "./components/TextEditor.tsx/TextEditor";
 import { toStandardHex } from "./utils";
@@ -51,13 +51,15 @@ export const generateTheme = (): ThemeOptions => {
     shape: { borderRadius: random(0, 12, false) * 2 },
   };
 
-  if (baseFontSize !== 14) newThemeOptions.typography!.fontSize = baseFontSize;
+  const newThemeOptionsTypography = newThemeOptions.typography as TypographyVariantsOptions;
+
+  if (baseFontSize !== 14) newThemeOptionsTypography.fontSize = baseFontSize;
 
   if (baseFontWeight !== 400) {
-    newThemeOptions.typography!.fontWeightLight = baseFontWeight - 100;
-    newThemeOptions.typography!.fontWeightRegular = baseFontWeight;
-    newThemeOptions.typography!.fontWeightMedium = baseFontWeight + 100;
-    newThemeOptions.typography!.fontWeightBold = baseFontWeight + 300;
+    newThemeOptionsTypography.fontWeightLight = baseFontWeight - 100;
+    newThemeOptionsTypography.fontWeightRegular = baseFontWeight;
+    newThemeOptionsTypography.fontWeightMedium = baseFontWeight + 100;
+    newThemeOptionsTypography.fontWeightBold = baseFontWeight + 300;
   }
 
   if (Math.random() > 0.5) {
