@@ -1,11 +1,5 @@
 import { Refresh } from "@mui/icons-material";
-import {
-  Box,
-  IconButton,
-  Tooltip,
-  Typography,
-  type SxProps,
-} from "@mui/material";
+import { Box, IconButton, Tooltip, Typography, type SxProps } from "@mui/material";
 import type { PropsWithChildren } from "react";
 
 export interface FieldContainerProps {
@@ -15,13 +9,7 @@ export interface FieldContainerProps {
   titleSx?: SxProps;
 }
 
-export const FieldContainer = ({
-  title,
-  children,
-  isDefault,
-  onReset,
-  titleSx,
-}: PropsWithChildren<FieldContainerProps>) => {
+export const FieldContainer = ({ title, children, isDefault, onReset, titleSx }: PropsWithChildren<FieldContainerProps>) => {
   return (
     <Box
       sx={{
@@ -41,12 +29,7 @@ export const FieldContainer = ({
             marginInlineEnd: 2,
           }}
         >
-          <Typography
-            textTransform="capitalize"
-            variant="subtitle2"
-            color="textSecondary"
-            sx={titleSx}
-          >
+          <Typography textTransform="capitalize" variant="subtitle2" color="textSecondary" sx={titleSx}>
             {title}
           </Typography>
         </Box>
@@ -62,16 +45,12 @@ export const FieldContainer = ({
         }}
       >
         {isDefault ? (
-          <Typography
-            variant="subtitle2"
-            color="textDisabled"
-            sx={{ fontSize: 11 }}
-          >
+          <Typography variant="subtitle2" color="textDisabled" sx={{ fontSize: 11 }}>
             auto
           </Typography>
         ) : (
           <Tooltip title="Reset">
-            <IconButton onClick={onReset} size="small" sx={{ p: 0.5 }}>
+            <IconButton onClick={onReset} sx={{ height: "30px", width: "30px" }}>
               <Refresh />
             </IconButton>
           </Tooltip>

@@ -22,3 +22,14 @@ pre {
     opacity: 0.4;
   }
 }
+
+*[popover],
+*[popover="auto"] {
+  inset: auto;
+  margin: 0;
+  transition: 0.3s all;
+  border: none;
+  @starting-style {
+    opacity: 0;
+  }
+}

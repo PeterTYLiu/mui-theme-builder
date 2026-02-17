@@ -9,15 +9,18 @@ const generateRandomPrimaryAndSecondaryColor = (): {
   primary: string;
   secondary: string;
 } => {
-  const diff = 50;
+  const diff = 60;
+  const minPrimaryLightness = 35;
+  const maxPrimaryLightness = 80;
 
   const hue = random(0, 360, false);
   const saturation = random(40, 100, false);
-  const lightness = random(35, 80, false);
+  const lightness = random(minPrimaryLightness, maxPrimaryLightness, false);
   const primary = toStandardHex(hslToRgb(`hsl(${hue},${saturation},${lightness})`));
 
-  const secondaryHue = hue + diff > 360 ? hue - diff : hue + diff;
-  const secondary = toStandardHex(hslToRgb(`hsl(${secondaryHue},${saturation},${lightness})`));
+  const secondaryHue = hue > 180 ? hue - diff : hue + diff;
+  const secondaryLightness = minPrimaryLightness + (lightness % (maxPrimaryLightness - minPrimaryLightness));
+  const secondary = toStandardHex(hslToRgb(`hsl(${secondaryHue},${saturation},${secondaryLightness})`));
 
   return { primary, secondary };
 };
@@ -68,7 +71,7 @@ export const generateTheme = (): ThemeOptions => {
     const defaultBg = generateRandomLightBgColor();
     newThemeOptions.palette!.background = {
       default: defaultBg,
-      paper: rgbToHex(lighten(defaultBg, Math.random() + 0.1)),
+      paper: rgbToHex(lighten(defaultBg, Math.min(Math.random() + 0.1, 1))),
     };
   }
 

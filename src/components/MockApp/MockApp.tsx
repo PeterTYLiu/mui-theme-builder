@@ -7,6 +7,11 @@ import {
   Box,
   Button,
   Chip,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
   Divider,
   IconButton,
   Link,
@@ -26,6 +31,7 @@ import {
   Typography,
   type ChipProps,
 } from "@mui/material";
+import { useState } from "react";
 import { FAKE_DATA_1, FAKE_DATA_2, FAKE_DATA_3, Sparkline } from "../Sparkline/Sparkline";
 
 interface Order {
@@ -89,9 +95,11 @@ const MOCK_DATA: Array<Order> = [
 ];
 
 export const MockApp = () => {
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   return (
     <Box
       sx={{
+        overscrollBehavior: "none",
         boxShadow: 5,
         bgcolor: "background.default",
         borderRadius: 1.5,
@@ -159,7 +167,7 @@ export const MockApp = () => {
             Tuesday, October 18
           </Typography>
           <Stack direction="row" gap={1}>
-            <Button variant="outlined" startIcon={<Upgrade />}>
+            <Button variant="outlined" startIcon={<Upgrade />} onClick={() => setIsDialogOpen(true)}>
               Export...
             </Button>
             <Button variant="contained" startIcon={<Add />}>
@@ -167,6 +175,22 @@ export const MockApp = () => {
             </Button>
           </Stack>
         </Stack>
+
+        <Dialog
+          open={isDialogOpen}
+          onClose={() => setIsDialogOpen(false)}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">Export Order Reports</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">No reports currently available for export</DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={() => setIsDialogOpen(false)}>OK</Button>
+          </DialogActions>
+        </Dialog>
+
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
           <TableContainer component={Paper} sx={{ flex: "1 1 440px" }}>
             <Table size="small" stickyHeader>

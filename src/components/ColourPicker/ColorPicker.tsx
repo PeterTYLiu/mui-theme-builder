@@ -2,21 +2,14 @@ import { Box } from "@mui/material";
 import { Chrome } from "@uiw/react-color";
 import { useRef, type FocusEvent, type KeyboardEvent } from "react";
 import { decimalToHex, intToHex, toStandardHex } from "../../utils";
-import {
-  FieldContainer,
-  type FieldContainerProps,
-} from "../FieldContainer/FieldContainer";
+import { FieldContainer, type FieldContainerProps } from "../FieldContainer/FieldContainer";
 
 interface ColorPickerProps extends FieldContainerProps {
   value: string;
   onChange: (hex: string) => void;
 }
 
-export const ColorPicker = ({
-  value,
-  onChange,
-  ...fieldContainerProps
-}: ColorPickerProps) => {
+export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPickerProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
 
   const popverId = Math.random().toString();
@@ -49,8 +42,7 @@ export const ColorPicker = ({
           width: "30px",
           position: "relative",
           // This is a checkerboard
-          background:
-            "conic-gradient(#fff 25%, #000 0 50%, #fff 0 75%, #000 0) 0 0/14px 14px",
+          background: "conic-gradient(#fff 25%, #000 0 50%, #fff 0 75%, #000 0) 0 0/14px 14px",
           "::before": {
             zIndex: 1,
             position: "absolute",
@@ -65,9 +57,8 @@ export const ColorPicker = ({
         id={popverId}
         popover="auto"
         sx={{
-          insetInlineStart: "calc(anchor(start) - 245px)",
+          insetInlineEnd: "anchor(start)",
           top: "anchor(top)",
-          margin: 0,
           bgcolor: "background.default",
         }}
       >
@@ -77,11 +68,7 @@ export const ColorPicker = ({
           showAlpha
           onChange={({ rgba }) => {
             const { r, g, b, a } = rgba;
-            onChange(
-              toStandardHex(
-                `#${intToHex(r)}${intToHex(g)}${intToHex(b)}${decimalToHex(a)}`,
-              ),
-            );
+            onChange(toStandardHex(`#${intToHex(r)}${intToHex(g)}${intToHex(b)}${decimalToHex(a)}`));
           }}
         />
       </Box>

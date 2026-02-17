@@ -257,7 +257,7 @@ export const TextEditor = () => {
               key={name}
               title={`${name.substring(10)}: ${currentWeight}`}
               isDefault={currentWeight === defaultWeight}
-              titleSx={{ fontWeight: currentWeight, width: "78px" }}
+              titleSx={{ fontWeight: currentWeight, width: "83px" }}
               onReset={() => deleteThemeOptionKey(["typography", name])}
             >
               <Slider
