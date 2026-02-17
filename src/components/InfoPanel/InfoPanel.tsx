@@ -21,7 +21,6 @@ export const InfoPanel = () => {
         <br />
         Builder
       </Typography>
-      <Typography color="textSecondary">By Peter Liu</Typography>
 
       <svg style={{ width: 0, height: 0, position: "absolute" }} aria-hidden="true" focusable="false">
         <linearGradient id="ukraine-gradient" x2="0" y2="1">
