@@ -5,7 +5,7 @@ import App from "./App.tsx";
 import "./index.css";
 
 const appThemeOptions: ThemeOptions = {
-  cssVariables: true,
+  cssVariables: { nativeColor: true },
   palette: {
     mode: "dark",
     primary: { main: "#34c2ff", contrastText: "#00344a" },
@@ -25,6 +25,7 @@ const appThemeOptions: ThemeOptions = {
       defaultProps: { disableRipple: true, disableTouchRipple: true },
       styleOverrides: { root: { ":focus-visible": { outline: "2px solid var(--mui-palette-primary-dark)" } } },
     },
+    MuiTab: { styleOverrides: { root: { outlineOffset: "-2px" } } },
     MuiIconButton: { styleOverrides: { root: { borderRadius: 0 } } },
     MuiButtonGroup: { defaultProps: { disableRipple: true } },
     MuiToggleButtonGroup: { defaultProps: { size: "small" } },

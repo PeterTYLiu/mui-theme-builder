@@ -65,7 +65,7 @@ export const InfoPanel = () => {
           </Typography>
         </Stack>
       )}
-      <Stack gap={0.6}>
+      <Stack gap={1}>
         <Typography>
           Use this app to build/generate a basic MUI theme, which you can customize further by referring to the{" "}
           <Link href="https://mui.com/material-ui/customization/theming" target="_blank">
@@ -73,6 +73,7 @@ export const InfoPanel = () => {
           </Link>
           .
         </Typography>
+        <Typography>Compatible with MUI 5 and higher.</Typography>
         <Typography>
           Inspired by (but not forked from){" "}
           <Link href="https://bareynol.github.io/mui-theme-creator" target="_blank">
