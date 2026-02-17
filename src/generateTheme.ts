@@ -35,7 +35,7 @@ const generateRandomLightBgColor = (): string => {
 const generateRandomDarkBgColor = (): string => {
   const hue = random(0, 360, false);
   const saturation = random(0, 100, false);
-  const lightness = random(0, 10, false);
+  const lightness = random(0, 20, false);
   return toStandardHex(hslToRgb(`hsl(${hue},${saturation},${lightness})`));
 };
 
