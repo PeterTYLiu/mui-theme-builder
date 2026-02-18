@@ -1,4 +1,4 @@
-import { hslToRgb, lighten, rgbToHex, type ThemeOptions, type TypographyVariantsOptions } from "@mui/material";
+import { getContrastRatio, hslToRgb, lighten, rgbToHex, type ThemeOptions, type TypographyVariantsOptions } from "@mui/material";
 import { random, sample } from "lodash";
 import { EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "./components/TextEditor.tsx/TextEditor";
 import { generateEmptyShadows, toStandardHex } from "./utils";
@@ -62,7 +62,8 @@ export const generateTheme = (): ThemeOptions => {
     newThemeOptionsTypography.fontWeightBold = baseFontWeight + 300;
   }
 
-  if (Math.random() > 0.5) {
+  const isDark = Math.random() > 0.5;
+  if (isDark) {
     const bgcolor = generateRandomDarkBgColor();
     newThemeOptions.palette!.mode = "dark";
     newThemeOptions.palette!.background = {
@@ -77,7 +78,13 @@ export const generateTheme = (): ThemeOptions => {
     };
   }
 
-  if (Math.random() > 0.7) newThemeOptions.shadows = generateEmptyShadows();
+  if (Math.random() > 0.7) {
+    const { paper, default: defaultBg } = newThemeOptions.palette!.background;
+    const hasSufficientPaperToBgRatio = getContrastRatio(paper as string, defaultBg as string) > 1.09;
+    if (hasSufficientPaperToBgRatio || isDark) {
+      newThemeOptions.shadows = generateEmptyShadows();
+    }
+  }
 
   return newThemeOptions;
 };
