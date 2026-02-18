@@ -1,4 +1,5 @@
 import { rgbToHex, type ThemeOptions } from "@mui/material";
+import { toast } from "sonner";
 
 export const toStandardHex = (input: string, fallback: string = "#000000"): string => {
   if (input.startsWith("rgb")) return toStandardHex(rgbToHex(input));
@@ -86,9 +87,9 @@ export async function saveObjectToClipboard(data: any): Promise<void> {
   try {
     const jsonString = JSON.stringify(data, null, 2);
     await navigator.clipboard.writeText(jsonString);
-    alert("Theme options copied to clipboard");
+    toast.success("Theme options copied to clipboard");
   } catch (error) {
-    alert("Failed to copy theme to clipboard");
+    toast.error("Failed to copy theme to clipboard");
     console.error(error);
     throw error;
   }

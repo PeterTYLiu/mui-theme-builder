@@ -13,6 +13,7 @@ import {
   type TypographyVariants,
 } from "@mui/material";
 import { useRef } from "react";
+import { toast } from "sonner";
 import { DEFAULT_THEME } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { deleteKeys } from "../../utils";
@@ -94,9 +95,9 @@ export const TextEditor = () => {
     try {
       const text = codeblockRef.current.innerText;
       await navigator.clipboard.writeText(text);
-      alert("Snippet copied to clipboard");
+      toast.success("Snippet copied to clipboard");
     } catch (error) {
-      alert("Failed to copy snippet to clipboard");
+      toast.error("Failed to copy snippet to clipboard");
       console.error(error);
       throw error;
     }

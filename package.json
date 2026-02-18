@@ -19,6 +19,7 @@
     "lodash": "^4.17.23",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
+    "sonner": "^2.0.7",
     "stringify-object": "^6.0.0"
   },
   "devDependencies": {

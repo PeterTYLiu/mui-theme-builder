@@ -1,6 +1,8 @@
+import { Check } from "@mui/icons-material";
 import { ThemeProvider, createTheme, type ThemeOptions } from "@mui/material";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
+import { Toaster } from "sonner";
 import App from "./App.tsx";
 import "./index.css";
 
@@ -33,10 +35,26 @@ const appThemeOptions: ThemeOptions = {
   },
 };
 
+const appTheme = createTheme(appThemeOptions);
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <ThemeProvider theme={createTheme(appThemeOptions)}>
+    <ThemeProvider theme={appTheme}>
       <App />
+      <Toaster
+        position="top-center"
+        duration={2100}
+        icons={{ success: <Check color="success" /> }}
+        toastOptions={{
+          style: {
+            backgroundColor: "var(--mui-palette-background-paper)",
+            color: "var(--mui-palette-text-primary)",
+            backgroundImage: "var(--mui-overlays-24)",
+            border: 0,
+            borderRadius: 0,
+          },
+        }}
+      />
     </ThemeProvider>
   </StrictMode>,
 );
