@@ -1,8 +1,5 @@
 import { Box, Slider, Stack, Typography } from "@mui/material";
-import {
-  FieldContainer,
-  type FieldContainerProps,
-} from "../FieldContainer/FieldContainer";
+import { FieldContainer, type FieldContainerProps } from "../FieldContainer/FieldContainer";
 
 interface NumberSpecifierProps extends FieldContainerProps {
   min: number;
@@ -13,14 +10,7 @@ interface NumberSpecifierProps extends FieldContainerProps {
   unit?: string;
 }
 
-export const NumberSpecifier = ({
-  title,
-  onReset,
-  isDefault,
-  onChange,
-  unit,
-  ...props
-}: NumberSpecifierProps) => {
+export const NumberSpecifier = ({ title, onReset, isDefault, onChange, unit, ...props }: NumberSpecifierProps) => {
   return (
     <FieldContainer {...{ title, onReset, isDefault }}>
       <Stack direction="row" sx={{ marginInlineEnd: 2 }}>
@@ -60,11 +50,7 @@ export const NumberSpecifier = ({
           </Box>
         )}
       </Stack>
-      <Slider
-        onChange={(_, value) => onChange(value)}
-        {...props}
-        valueLabelDisplay="off"
-      />
+      <Slider onChange={(_, value) => onChange(value)} {...props} valueLabelDisplay="off" />
     </FieldContainer>
   );
 };
