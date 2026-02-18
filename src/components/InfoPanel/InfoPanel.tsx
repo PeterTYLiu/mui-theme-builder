@@ -24,10 +24,10 @@ export const InfoPanel = () => {
 
       <svg style={{ width: 0, height: 0, position: "absolute" }} aria-hidden="true" focusable="false">
         <linearGradient id="ukraine-gradient" x2="0" y2="1">
-          <stop offset="0%" stop-color="#0057B7" />
-          <stop offset="50%" stop-color="#0057B7" />
-          <stop offset="50%" stop-color="#FFDD00" />
-          <stop offset="100%" stop-color="#FFDD00" />
+          <stop offset="0%" stopColor="#0057B7" />
+          <stop offset="50%" stopColor="#0057B7" />
+          <stop offset="50%" stopColor="#FFDD00" />
+          <stop offset="100%" stopColor="#FFDD00" />
         </linearGradient>
       </svg>
 

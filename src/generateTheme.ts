@@ -1,7 +1,7 @@
 import { hslToRgb, lighten, rgbToHex, type ThemeOptions, type TypographyVariantsOptions } from "@mui/material";
 import { random, sample } from "lodash";
 import { EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "./components/TextEditor.tsx/TextEditor";
-import { toStandardHex } from "./utils";
+import { generateEmptyShadows, toStandardHex } from "./utils";
 
 const POSSIBLE_FONTS = [...WEB_SAFE_FONTS, ...EXAMPLE_GOOGLE_FONTS];
 
@@ -76,6 +76,8 @@ export const generateTheme = (): ThemeOptions => {
       paper: rgbToHex(lighten(defaultBg, Math.min(Math.random() + 0.1, 1))),
     };
   }
+
+  if (Math.random() > 0.7) newThemeOptions.shadows = generateEmptyShadows();
 
   return newThemeOptions;
 };

@@ -24,7 +24,9 @@ export const FieldGroupContainer = ({ title, actions, children }: PropsWithChild
             display: "flex",
             justifyContent: "space-between",
             alignItems: "center",
-            mb: 1,
+            "&:not(:last-child)": {
+              mb: 1,
+            },
           }}
         >
           {Boolean(title) && (

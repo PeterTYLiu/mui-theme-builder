@@ -1,4 +1,4 @@
-import { rgbToHex, type ThemeOptions } from "@mui/material";
+import { rgbToHex, type Shadows, type ThemeOptions } from "@mui/material";
 import { toast } from "sonner";
 
 export const toStandardHex = (input: string, fallback: string = "#000000"): string => {
@@ -94,3 +94,9 @@ export async function saveObjectToClipboard(data: any): Promise<void> {
     throw error;
   }
 }
+
+export const generateEmptyShadows = () => {
+  const shadows = new Array(24).fill("");
+  shadows.unshift("none");
+  return shadows as Shadows;
+};
