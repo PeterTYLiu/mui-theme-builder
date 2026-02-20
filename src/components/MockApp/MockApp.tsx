@@ -19,6 +19,7 @@ import {
   Paper,
   Select,
   Stack,
+  styled,
   Table,
   TableBody,
   TableCell,
@@ -33,6 +34,19 @@ import {
 } from "@mui/material";
 import { useState } from "react";
 import { FAKE_DATA_1, FAKE_DATA_2, FAKE_DATA_3, Sparkline } from "../Sparkline/Sparkline";
+
+// Remove these styled components when MUI fixes table border colors
+// https://github.com/mui/material-ui/issues/47749
+
+const StyledTableHeaderCell = styled(TableCell)(({ theme }) => ({
+  backgroundColor: theme.palette.background.paper,
+  backgroundImage: "var(--Paper-overlay)",
+  borderColor: theme.palette.divider,
+}));
+
+const StyledTableBodyCell = styled(TableCell)(({ theme }) => ({
+  borderColor: theme.palette.divider,
+}));
 
 interface Order {
   id: string;
@@ -149,7 +163,7 @@ export const MockApp = () => {
           </Tooltip>
         </Toolbar>
       </AppBar>
-      <Box sx={{ p: 2 }}>
+      <Box sx={{ p: 3, pt: 2 }}>
         <Alert severity="warning" sx={{ mb: 2 }} onClose={() => {}}>
           System will be going offline at 8pm EST for maintenance
         </Alert>
@@ -196,49 +210,21 @@ export const MockApp = () => {
             <Table size="small" stickyHeader>
               <TableHead>
                 <TableRow>
-                  <TableCell
-                    sx={{
-                      bgcolor: "background.paper",
-                      backgroundImage: "var(--Paper-overlay)",
-                    }}
-                  >
-                    Order ID
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      bgcolor: "background.paper",
-                      backgroundImage: "var(--Paper-overlay)",
-                    }}
-                  >
-                    Driver
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      bgcolor: "background.paper",
-                      backgroundImage: "var(--Paper-overlay)",
-                    }}
-                  >
-                    Customer
-                  </TableCell>
-                  <TableCell
-                    sx={{
-                      bgcolor: "background.paper",
-                      backgroundImage: "var(--Paper-overlay)",
-                    }}
-                  >
-                    Status
-                  </TableCell>
+                  <StyledTableHeaderCell>Order ID</StyledTableHeaderCell>
+                  <StyledTableHeaderCell>Driver</StyledTableHeaderCell>
+                  <StyledTableHeaderCell>Customer</StyledTableHeaderCell>
+                  <StyledTableHeaderCell>Status</StyledTableHeaderCell>
                 </TableRow>
               </TableHead>
               <TableBody>
                 {MOCK_DATA.map((data, index) => (
                   <TableRow key={data.id}>
-                    <TableCell>
+                    <StyledTableBodyCell>
                       <Link href="#">
                         <b>{data.id}</b>
                       </Link>
-                    </TableCell>
-                    <TableCell>
+                    </StyledTableBodyCell>
+                    <StyledTableBodyCell>
                       <Stack direction="row" gap={1} alignItems="center">
                         <Avatar
                           sx={{
@@ -251,18 +237,18 @@ export const MockApp = () => {
                         />
                         <Typography sx={{ lineHeight: 1 }}>{data.driverName}</Typography>
                       </Stack>
-                    </TableCell>
-                    <TableCell>
+                    </StyledTableBodyCell>
+                    <StyledTableBodyCell>
                       <Box>
                         <Typography>{data.customer}</Typography>
                         <Typography variant="subtitle2" color="textSecondary">
                           {data.orderer}
                         </Typography>
                       </Box>
-                    </TableCell>
-                    <TableCell>
+                    </StyledTableBodyCell>
+                    <StyledTableBodyCell>
                       <Chip color={STATUS_TO_COLOR_MAP[data.status]} label={data.status} />
-                    </TableCell>
+                    </StyledTableBodyCell>
                   </TableRow>
                 ))}
               </TableBody>
