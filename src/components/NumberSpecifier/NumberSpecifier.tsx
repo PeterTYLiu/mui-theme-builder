@@ -11,20 +11,29 @@ interface NumberSpecifierProps extends FieldContainerProps {
 }
 
 export const NumberSpecifier = ({ title, onReset, isDefault, onChange, unit, ...props }: NumberSpecifierProps) => {
+  const hasUnits = Boolean(unit);
   return (
     <FieldContainer {...{ title, onReset, isDefault }}>
-      <Stack direction="row" sx={{ marginInlineEnd: 2 }}>
+      <Stack
+        sx={{
+          flexDirection: "row",
+          alignContent: "stretch",
+          marginInlineEnd: 2,
+          position: "relative",
+        }}
+      >
         <Box
           component="input"
           type="number"
           onChange={(e) => onChange(e.target.valueAsNumber)}
           {...props}
           sx={{
-            fontFamily: "monospace",
-            width: "60px",
-            borderRadius: 2,
+            width: hasUnits ? "100px" : "60px",
+            paddingInlineStart: 1.5,
+            paddingInlineEnd: hasUnits ? "40px" : 1.5,
+            borderRadius: 1,
             border: 1,
-            textAlign: "center",
+            textAlign: "start",
             borderColor: "grey.600",
             fontSize: "12px",
             background: "transparent",
@@ -39,9 +48,11 @@ export const NumberSpecifier = ({ title, onReset, isDefault, onChange, unit, ...
           <Box
             sx={{
               display: "grid",
-              px: 1,
+              position: "absolute",
+              insetBlock: 0,
+              insetInlineEnd: "calc(1.5 * var(--mui-spacing))",
               placeItems: "center",
-              bgcolor: "grey.600",
+              pointerEvents: "none",
             }}
           >
             <Typography variant="subtitle2" color="textSecondary">

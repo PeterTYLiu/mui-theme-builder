@@ -132,6 +132,7 @@ export const TextEditor = () => {
           value={currentFont}
           inputValue={currentFont}
           freeSolo
+          size="small"
           disableClearable={currentFont === DEFAULT_FONT}
           options={[DEFAULT_FONT, ...WEB_SAFE_FONTS, ...EXAMPLE_GOOGLE_FONTS]}
           groupBy={(option) => {
@@ -166,21 +167,14 @@ export const TextEditor = () => {
         </FormHelperText>
         {isGoogleFont && (
           <>
-            <Typography variant="subtitle2" sx={{ mt: 2, mb: 0.5 }}>
-              <Link component="button" onClick={copyCodeBlock}>
-                Copy this snippet
-              </Link>{" "}
-              to use{" "}
-              <Link target="_blank" href={"https://fonts.google.com/noto/specimen/" + currentFont?.replaceAll(" ", "+")}>
-                this Google Font
-              </Link>
-            </Typography>
             <Box
               component="pre"
               ref={codeblockRef}
               sx={{
                 m: 0,
+                mt: 2,
                 border: 1,
+                borderRadius: 1,
                 p: 1,
                 overflow: "auto",
                 borderColor: "grey.700",
@@ -195,6 +189,15 @@ export const TextEditor = () => {
               <br />
               {`<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=${currentFont?.replaceAll(" ", "+")}:wght@${currentWeights.join(";")}&display=swap" />`}
             </Box>
+            <FormHelperText>
+              <Link component="button" onClick={copyCodeBlock}>
+                Copy this snippet
+              </Link>{" "}
+              to use{" "}
+              <Link target="_blank" href={"https://fonts.google.com/noto/specimen/" + currentFont?.replaceAll(" ", "+")}>
+                {currentFont}
+              </Link>
+            </FormHelperText>
           </>
         )}
       </FieldGroupContainer>

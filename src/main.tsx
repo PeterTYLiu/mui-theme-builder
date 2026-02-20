@@ -10,10 +10,10 @@ const appThemeOptions: ThemeOptions = {
   cssVariables: { nativeColor: true },
   palette: {
     mode: "dark",
-    primary: { main: "#34c2ff", contrastText: "#00344a" },
+    primary: { main: "#72bcdc", contrastText: "#00344a" },
     secondary: { main: "#BBB" },
   },
-  shape: { borderRadius: 0 },
+  shape: { borderRadius: 3 },
   typography: {
     fontSize: 12,
     fontFamily: "Lexend",
@@ -28,7 +28,7 @@ const appThemeOptions: ThemeOptions = {
       styleOverrides: { root: { ":focus-visible": { outline: "2px solid var(--mui-palette-primary-dark)" } } },
     },
     MuiTab: { styleOverrides: { root: { outlineOffset: "-2px" } } },
-    MuiIconButton: { styleOverrides: { root: { borderRadius: 0 } } },
+    MuiIconButton: { styleOverrides: { root: { borderRadius: 3 } } },
     MuiButtonGroup: { defaultProps: { disableRipple: true } },
     MuiToggleButtonGroup: { defaultProps: { size: "small" } },
     MuiTooltip: { defaultProps: { placement: "top" }, styleOverrides: { tooltip: { fontSize: "13px" } } },

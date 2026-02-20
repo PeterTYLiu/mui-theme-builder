@@ -1,5 +1,6 @@
 import { GetApp, Refresh, Share } from "@mui/icons-material";
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -11,7 +12,7 @@ import {
   Stack,
   Tooltip,
   Typography,
-  type IconButtonProps,
+  type SxProps,
 } from "@mui/material";
 import { useState } from "react";
 import { toast } from "sonner";
@@ -19,14 +20,14 @@ import { generateTheme } from "../../generateTheme";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { saveObjectToClipboard } from "../../utils";
 
-const SHARED_ICONBUTTON_PROPS: IconButtonProps = {
-  size: "large",
-  sx: {
-    bgcolor: "primary.main",
-    "&:hover": { bgcolor: "primary.dark" },
-    "&:disabled": { bgcolor: "primary.main", opacity: 0.5, color: "primary.contrastText" },
-    color: "primary.contrastText",
-  },
+const SHARED_BUTTON_STYLES: SxProps = {
+  bgcolor: "background.paper",
+  backgroundImage: "var(--mui-overlays-1)",
+  "&:hover": { bgcolor: "background.paper" },
+  "&:disabled": { bgcolor: "background.paper", opacity: 0.5, color: "text.primary" },
+  color: "text.primary",
+  borderRadius: 1,
+  transition: "all 0.3s ease",
 };
 
 const shareSite = async () => {
@@ -56,28 +57,25 @@ export const BottomControls = () => {
 
   return (
     <Stack gap={2} sx={{ p: { xs: 2, sm: 3, md: 4 }, pt: { xs: 0, sm: 0, md: 0 } }} alignItems="center">
-      <Stack gap={1.5} direction="row">
-        <Button
-          size="large"
-          variant="contained"
-          onClick={() => setThemeOptions(generateTheme())}
+      <Stack gap={1} direction="row" sx={{ alignItems: "center" }}>
+        <Box
           sx={{
-            border: "2px solid transparent",
-            borderImage: "conic-gradient(from 0deg, red, yellow, lime, aqua, blue, magenta, red) 1",
-            borderImageSlice: 1,
-            transition: "all 0.3s ease",
-            fontWeight: "bold",
+            backgroundImage: "conic-gradient(#ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c1, #ff0000)",
+            borderRadius: 1,
+            p: "1px",
           }}
         >
-          Randomize!
-        </Button>
+          <Button variant="contained" onClick={() => setThemeOptions(generateTheme())} sx={SHARED_BUTTON_STYLES}>
+            Randomize!
+          </Button>
+        </Box>
         <Tooltip title="Export theme">
-          <IconButton disabled={!hasEditedTheme} onClick={() => saveObjectToClipboard(themeOptions)} {...SHARED_ICONBUTTON_PROPS}>
+          <IconButton disabled={!hasEditedTheme} onClick={() => saveObjectToClipboard(themeOptions)} sx={SHARED_BUTTON_STYLES}>
             <GetApp />
           </IconButton>
         </Tooltip>
         <Tooltip title="Reset">
-          <IconButton disabled={!hasEditedTheme} onClick={() => setIsResetDialogOpen(true)} {...SHARED_ICONBUTTON_PROPS}>
+          <IconButton disabled={!hasEditedTheme} onClick={() => setIsResetDialogOpen(true)} sx={SHARED_BUTTON_STYLES}>
             <Refresh />
           </IconButton>
         </Tooltip>
@@ -105,7 +103,7 @@ export const BottomControls = () => {
           </DialogActions>
         </Dialog>
         <Tooltip title="Share">
-          <IconButton onClick={shareSite} {...SHARED_ICONBUTTON_PROPS}>
+          <IconButton onClick={shareSite} sx={SHARED_BUTTON_STYLES}>
             <Share />
           </IconButton>
         </Tooltip>

@@ -38,6 +38,9 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
         sx={{
           border: 1,
           borderInlineEnd: 0,
+          borderRadius: 1,
+          borderEndEndRadius: 0,
+          borderStartEndRadius: 0,
           borderColor: "grey.600",
           width: "30px",
           position: "relative",
@@ -46,6 +49,9 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
           "::before": {
             zIndex: 1,
             position: "absolute",
+            borderRadius: "calc(var(--mui-shape-borderRadius) - 1px)",
+            borderEndEndRadius: 0,
+            borderStartEndRadius: 0,
             content: '""',
             inset: 0,
             bgcolor: value,
@@ -78,7 +84,10 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
         key={value}
         sx={{
           fontFamily: "monospace",
-          borderRadius: 2,
+
+          borderRadius: 1,
+          borderStartStartRadius: 0,
+          borderEndStartRadius: 0,
           width: "80px",
           border: 1,
           borderColor: "grey.600",
@@ -91,27 +100,6 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
         onBlur={onInputBlur}
         onKeyDown={onInputEnter}
       />
-      {/* <Box
-        component="input"
-        type="number"
-        max="100"
-        min="0"
-        sx={{
-          "::-webkit-inner-spin-button": {
-            "-webkit-appearance": "none",
-            margin: 0,
-          },
-          fontFamily: "monospace",
-          borderRadius: 2,
-          width: "45px",
-          border: 1,
-          borderColor: "grey.600",
-          fontSize: "12px",
-          background: "transparent",
-          color: "text.primary",
-          textAlign: "center",
-        }}
-      /> */}
     </FieldContainer>
   );
 };
