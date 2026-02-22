@@ -66,6 +66,7 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
           insetInlineEnd: "anchor(start)",
           top: "anchor(top)",
           bgcolor: "background.default",
+          positionTryFallbacks: "flip-block",
         }}
       >
         <Chrome

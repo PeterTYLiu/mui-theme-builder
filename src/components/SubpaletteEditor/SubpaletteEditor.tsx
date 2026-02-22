@@ -16,26 +16,39 @@ const PALETTES = {
 
 interface SubpaletteEditorProps {
   name: keyof PaletteOptions;
-  manual: Array<string>;
-  derived: Array<keyof SimplePaletteColorOptions>;
+  manual?: Array<string>;
+  derived?: Array<keyof SimplePaletteColorOptions>;
 }
 
-export const SubpaletteEditor = ({ name, manual, derived }: SubpaletteEditorProps) => {
+export const SubpaletteEditor = ({ name, manual = [], derived = [] }: SubpaletteEditorProps) => {
   const { theme, themeOptions, mergeThemeOptions, deleteThemeOptionKey } = useInnerTheme();
   const mode = theme.palette.mode;
   const [showDerived, setShowDerived] = useState(false);
 
-  return (
-    <FieldGroupContainer
-      title={name}
-      actions={
-        derived.length > 0 ? (
-          <Button size="small" color="secondary" sx={{ p: 0 }} onClick={() => setShowDerived((prev) => !prev)}>
-            {showDerived ? "Hide derived" : "See derived"}
-          </Button>
-        ) : undefined
+  const derivedToggleButton = (
+    <Button size="small" color="secondary" sx={{ p: 0 }} onClick={() => setShowDerived((prev) => !prev)}>
+      {showDerived ? "Hide derived" : "See derived"}
+    </Button>
+  );
+
+  // Removing this teranry would result in us calling `toStandardHex` on an object
+  const keylessColorPicker = !manual.length ? (
+    <ColorPicker
+      isDefault={theme.palette[name] === PALETTES[mode][name]}
+      value={toStandardHex(theme.palette[name])}
+      onChange={(hex) =>
+        mergeThemeOptions({
+          palette: { [name]: hex },
+        })
       }
-    >
+      onReset={() => {
+        deleteThemeOptionKey(["palette", name]);
+      }}
+    />
+  ) : undefined;
+
+  return (
+    <FieldGroupContainer title={name} actions={derived.length > 0 ? derivedToggleButton : keylessColorPicker}>
       {manual.map((key) => (
         <ColorPicker
           title={key}
@@ -49,8 +62,8 @@ export const SubpaletteEditor = ({ name, manual, derived }: SubpaletteEditorProp
           }
           onReset={() => {
             const customColorsObject = themeOptions?.palette?.[name] ?? {};
-            // This might be a string, e.g. for "divider". Handle this later.
             if (typeof customColorsObject !== "object") return;
+
             // If there are any custom derived colours, the manual color cannot be deleted
             if (derived.some((key) => key in customColorsObject)) {
               mergeThemeOptions({

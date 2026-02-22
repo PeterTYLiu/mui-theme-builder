@@ -24,11 +24,12 @@ export const PaletteEditor = () => {
         </ToggleButtonGroup>
       </FieldGroupContainer>
       <SubpaletteEditor name="primary" manual={["main"]} derived={["light", "dark", "contrastText"]} />
-      <SubpaletteEditor name={"background"} manual={["default", "paper"]} derived={[]} />
-      <SubpaletteEditor name="text" manual={["primary", "secondary", "disabled"]} derived={[]} />
+      <SubpaletteEditor name={"background"} manual={["default", "paper"]} />
+      <SubpaletteEditor name="text" manual={["primary", "secondary", "disabled"]} />
       {COLORS_BOTTOM.map((color) => (
         <SubpaletteEditor key={color} name={color} manual={["main"]} derived={["light", "dark", "contrastText"]} />
       ))}
+      <SubpaletteEditor name="divider" />
     </>
   );
 };
