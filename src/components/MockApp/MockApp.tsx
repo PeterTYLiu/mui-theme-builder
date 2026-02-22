@@ -25,6 +25,7 @@ import {
   TableCell,
   TableContainer,
   TableHead,
+  TablePagination,
   TableRow,
   TextField,
   Toolbar,
@@ -206,54 +207,57 @@ export const MockApp = () => {
         </Dialog>
 
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-          <TableContainer component={Paper} sx={{ flex: "1 1 440px" }}>
-            <Table size="small" stickyHeader>
-              <TableHead>
-                <TableRow>
-                  <StyledTableHeaderCell>Order ID</StyledTableHeaderCell>
-                  <StyledTableHeaderCell>Driver</StyledTableHeaderCell>
-                  <StyledTableHeaderCell>Customer</StyledTableHeaderCell>
-                  <StyledTableHeaderCell>Status</StyledTableHeaderCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {MOCK_DATA.map((data, index) => (
-                  <TableRow key={data.id}>
-                    <StyledTableBodyCell>
-                      <Link href="#">
-                        <b>{data.id}</b>
-                      </Link>
-                    </StyledTableBodyCell>
-                    <StyledTableBodyCell>
-                      <Stack direction="row" gap={1} alignItems="center">
-                        <Avatar
-                          sx={{
-                            width: 24,
-                            height: 24,
-                            border: 1,
-                            borderColor: "grey.300",
-                          }}
-                          src={`https://picsum.photos/seed/${index * data.driverName.length}/64`}
-                        />
-                        <Typography sx={{ lineHeight: 1 }}>{data.driverName}</Typography>
-                      </Stack>
-                    </StyledTableBodyCell>
-                    <StyledTableBodyCell>
-                      <Box>
-                        <Typography>{data.customer}</Typography>
-                        <Typography variant="subtitle2" color="textSecondary">
-                          {data.orderer}
-                        </Typography>
-                      </Box>
-                    </StyledTableBodyCell>
-                    <StyledTableBodyCell>
-                      <Chip color={STATUS_TO_COLOR_MAP[data.status]} label={data.status} />
-                    </StyledTableBodyCell>
+          <Paper sx={{ flex: "1 1 440px", minWidth: "200px", overflow: "hidden" }}>
+            <TableContainer>
+              <Table size="small" stickyHeader>
+                <TableHead>
+                  <TableRow>
+                    <StyledTableHeaderCell>Order ID</StyledTableHeaderCell>
+                    <StyledTableHeaderCell>Driver</StyledTableHeaderCell>
+                    <StyledTableHeaderCell>Customer</StyledTableHeaderCell>
+                    <StyledTableHeaderCell>Status</StyledTableHeaderCell>
                   </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+                </TableHead>
+                <TableBody>
+                  {MOCK_DATA.map((data, index) => (
+                    <TableRow key={data.id}>
+                      <StyledTableBodyCell>
+                        <Link href="#">
+                          <b>{data.id}</b>
+                        </Link>
+                      </StyledTableBodyCell>
+                      <StyledTableBodyCell>
+                        <Stack direction="row" gap={1} alignItems="center">
+                          <Avatar
+                            sx={{
+                              width: 24,
+                              height: 24,
+                              border: 1,
+                              borderColor: "grey.300",
+                            }}
+                            src={`https://picsum.photos/seed/${index * data.driverName.length}/64`}
+                          />
+                          <Typography sx={{ lineHeight: 1 }}>{data.driverName}</Typography>
+                        </Stack>
+                      </StyledTableBodyCell>
+                      <StyledTableBodyCell>
+                        <Box>
+                          <Typography>{data.customer}</Typography>
+                          <Typography variant="subtitle2" color="textSecondary">
+                            {data.orderer}
+                          </Typography>
+                        </Box>
+                      </StyledTableBodyCell>
+                      <StyledTableBodyCell>
+                        <Chip color={STATUS_TO_COLOR_MAP[data.status]} label={data.status} />
+                      </StyledTableBodyCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
+            <TablePagination component="div" count={6} page={0} onPageChange={() => {}} rowsPerPage={10} />
+          </Paper>
           <Paper sx={{ p: 2, flex: "1 1 250px" }}>
             <Stack direction="row" justifyContent="space-between" alignItems="center" gap={2} mb={1.5}>
               <Typography fontWeight="bold">Analytics</Typography>
