@@ -36,10 +36,10 @@ export const ComponentList = () => {
     <Box sx={{ flex: "1 1 100px", overflow: "scroll" }}>
       {Object.entries(COMPONENTS).map((category) => (
         <Box key={category[0]}>
-          <Paper sx={{ position: "sticky", top: "0px", zIndex: 1, boxShadow: "none" }}>
+          <Paper sx={{ position: "sticky", top: "0px", zIndex: 1, boxShadow: "none", borderRadius: 0 }}>
             <Typography sx={{ textTransform: "uppercase", color: "text.secondary" }}>{category[0]}</Typography>
           </Paper>
-          <Box sx={{ borderInlineStart: "1px solid red", borderColor: "divider", my: 0.5 }}>
+          <Box sx={{ borderInlineStart: "1px solid red", borderColor: "divider", my: 0.5, paddingInlineStart: 0.5 }}>
             {category[1]?.map((component) => {
               const hasOverride = typeof component === "object";
               return (

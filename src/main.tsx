@@ -6,6 +6,8 @@ import { Toaster } from "sonner";
 import App from "./App.tsx";
 import "./index.css";
 
+const BORDER_RADIUS = 4;
+
 const appThemeOptions: ThemeOptions = {
   cssVariables: { nativeColor: true },
   palette: {
@@ -13,7 +15,7 @@ const appThemeOptions: ThemeOptions = {
     primary: { main: "#72bcdc", contrastText: "#00344a" },
     secondary: { main: "#BBB" },
   },
-  shape: { borderRadius: 3 },
+  shape: { borderRadius: BORDER_RADIUS },
   typography: {
     fontSize: 12,
     fontFamily: "Lexend",
@@ -28,7 +30,7 @@ const appThemeOptions: ThemeOptions = {
       styleOverrides: { root: { ":focus-visible": { outline: "2px solid var(--mui-palette-primary-dark)" } } },
     },
     MuiTab: { styleOverrides: { root: { outlineOffset: "-2px" } } },
-    MuiIconButton: { styleOverrides: { root: { borderRadius: 3 } } },
+    MuiIconButton: { styleOverrides: { root: { borderRadius: BORDER_RADIUS } } },
     MuiButtonGroup: { defaultProps: { disableRipple: true } },
     MuiToggleButtonGroup: { defaultProps: { size: "small" } },
     MuiTooltip: { defaultProps: { placement: "top" }, styleOverrides: { tooltip: { fontSize: "13px" } } },
