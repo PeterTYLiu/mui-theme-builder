@@ -1,4 +1,15 @@
-import { AccountCircle, AcUnitSharp, Add, GasMeterRounded, Notifications, Search, TrackChanges, Upgrade } from "@mui/icons-material";
+import {
+  AccountCircle,
+  AcUnitSharp,
+  Add,
+  AttachMoney,
+  CurrencyPound,
+  GasMeterRounded,
+  Notifications,
+  Search,
+  TrackChanges,
+  Upgrade,
+} from "@mui/icons-material";
 import {
   Alert,
   AppBar,
@@ -6,6 +17,7 @@ import {
   Badge,
   Box,
   Button,
+  Checkbox,
   Chip,
   Dialog,
   DialogActions,
@@ -28,6 +40,8 @@ import {
   TablePagination,
   TableRow,
   TextField,
+  ToggleButton,
+  ToggleButtonGroup,
   Toolbar,
   Tooltip,
   Typography,
@@ -111,8 +125,10 @@ const MOCK_DATA: Array<Order> = [
 
 export const MockApp = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDollars, setIsDollars] = useState(true);
   return (
     <Box
+      id="mock-app"
       sx={{
         overscrollBehavior: "none",
         boxShadow: 5,
@@ -158,7 +174,7 @@ export const MockApp = () => {
             </IconButton>
           </Tooltip>
           <Tooltip title="My Account">
-            <IconButton size="large" color="inherit">
+            <IconButton size="large" color="inherit" className="tooltip-override">
               <AccountCircle />
             </IconButton>
           </Tooltip>
@@ -182,7 +198,7 @@ export const MockApp = () => {
             Tuesday, October 18
           </Typography>
           <Stack direction="row" gap={1}>
-            <Button variant="outlined" startIcon={<Upgrade />} onClick={() => setIsDialogOpen(true)}>
+            <Button variant="outlined" startIcon={<Upgrade />} onClick={() => setIsDialogOpen(true)} className="dialog-override">
               Export...
             </Button>
             <Button variant="contained" startIcon={<Add />}>
@@ -207,11 +223,14 @@ export const MockApp = () => {
         </Dialog>
 
         <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2 }}>
-          <Paper sx={{ flex: "1 1 440px", minWidth: "200px", overflow: "hidden" }}>
+          <Paper sx={{ flex: "1 1 440px", minWidth: "200px", overflow: "hidden" }} className="table-override">
             <TableContainer>
               <Table size="small" stickyHeader>
                 <TableHead>
                   <TableRow>
+                    <StyledTableHeaderCell sx={{ px: 0.5 }}>
+                      <Checkbox />
+                    </StyledTableHeaderCell>
                     <StyledTableHeaderCell>Order ID</StyledTableHeaderCell>
                     <StyledTableHeaderCell>Driver</StyledTableHeaderCell>
                     <StyledTableHeaderCell>Customer</StyledTableHeaderCell>
@@ -221,6 +240,9 @@ export const MockApp = () => {
                 <TableBody>
                   {MOCK_DATA.map((data, index) => (
                     <TableRow key={data.id}>
+                      <StyledTableBodyCell sx={{ px: 0.5 }}>
+                        <Checkbox defaultChecked={Math.random() > 0.5} />
+                      </StyledTableBodyCell>
                       <StyledTableBodyCell>
                         <Link href="#">
                           <b>{data.id}</b>
@@ -258,10 +280,10 @@ export const MockApp = () => {
             </TableContainer>
             <TablePagination component="div" count={6} page={0} onPageChange={() => {}} rowsPerPage={10} />
           </Paper>
-          <Paper sx={{ p: 2, flex: "1 1 250px" }}>
+          <Paper sx={{ p: 2, flex: "1 1 250px" }} className="paper-override">
             <Stack direction="row" justifyContent="space-between" alignItems="center" gap={2} mb={1.5}>
               <Typography fontWeight="bold">Analytics</Typography>
-              <Select size="small" value={15}>
+              <Select size="small" value={15} className="select-override">
                 <MenuItem value={10}>Today</MenuItem>
                 <MenuItem value={15}>This Week</MenuItem>
                 <MenuItem value={20}>This Month</MenuItem>
@@ -269,15 +291,31 @@ export const MockApp = () => {
               </Select>
             </Stack>
             <Divider />
-            <Box py={1.5}>
-              <Typography variant="subtitle2">Net revenue</Typography>
-              <Typography variant="h4">
-                $32,619
-                <Typography variant="h6" component="span">
-                  .37
+            <Stack sx={{ py: 1.5, flexDirection: "row", justifyContent: "space-between", alignItems: "center", gap: 2 }}>
+              <Box>
+                <Typography variant="subtitle2">Net revenue</Typography>
+                <Typography variant="h4">
+                  {isDollars ? "$32,619" : "£24,177"}
+                  <Typography variant="h6" component="span">
+                    {isDollars ? ".37" : ".81"}
+                  </Typography>
                 </Typography>
-              </Typography>
-            </Box>
+              </Box>
+              <ToggleButtonGroup
+                size="small"
+                exclusive
+                value={isDollars ? "dollar" : "pound"}
+                onChange={(_, value) => setIsDollars(value === "dollar")}
+              >
+                <ToggleButton value="dollar">
+                  <AttachMoney />
+                </ToggleButton>
+                <ToggleButton value="pound">
+                  <CurrencyPound />
+                </ToggleButton>
+              </ToggleButtonGroup>
+            </Stack>
+
             <Divider />
             <Stack pt={1.5} gap={2}>
               <Sparkline title="Tracking events" data={FAKE_DATA_1} icon={<TrackChanges fontSize="small" />} />

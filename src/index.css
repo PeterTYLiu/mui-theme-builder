@@ -33,3 +33,24 @@ pre {
     opacity: 0;
   }
 }
+
+.pulse {
+  outline-style: solid !important;
+  outline-width: 3px;
+  outline-color: transparent;
+  animation: pulsate 700ms 4 linear;
+}
+
+@keyframes pulsate {
+  from {
+    outline-offset: 0px;
+    outline-width: 3px;
+    outline-color: var(--mui-palette-warning-main);
+  }
+
+  to {
+    outline-offset: 6px;
+    outline-width: 0.5px;
+    outline-color: transparent;
+  }
+}
