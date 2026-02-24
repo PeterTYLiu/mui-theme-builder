@@ -45,6 +45,8 @@ export const InfoPanel = () => {
               fill="none"
               className="MuiSvgIcon-root MuiSvgIcon-fontSizeMedium css-kbd6i0-MuiSvgIcon-root"
               viewBox="0 0 24 24"
+              height="20"
+              width="20"
             >
               <path
                 fill="#ffffff"

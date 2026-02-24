@@ -42,14 +42,16 @@ export const ComponentList = () => {
           <Box sx={{ borderInlineStart: "1px solid red", borderColor: "divider", my: 0.5, paddingInlineStart: 0.5 }}>
             {category[1]?.map((component) => {
               const hasOverride = typeof component === "object";
+              const componentName = hasOverride ? component[0] : component;
               return (
                 <Button
+                  key={componentName}
                   size="medium"
                   sx={{ color: "text.primary", justifyContent: "start", textTransform: "capitalize", fontSize: "14px" }}
                   fullWidth
                   onClick={() => highlightComponent(hasOverride ? component[1] : constructClassName(component))}
                 >
-                  {hasOverride ? component[0] : component}
+                  {componentName}
                 </Button>
               );
             })}
