@@ -6,14 +6,12 @@ import { FieldContainer, type FieldContainerProps } from "../FieldContainer/Fiel
 
 interface ColorPickerProps extends FieldContainerProps {
   value: string;
+  name: string;
   onChange: (hex: string) => void;
 }
 
-export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPickerProps) => {
+export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: ColorPickerProps) => {
   const inputRef = useRef<HTMLInputElement>(null);
-
-  const popverId = Math.random().toString();
-
   const handleNewInputValue = (inputValue: string) => {
     const newValue = toStandardHex(inputValue, value);
     if (newValue === value) return;
@@ -34,7 +32,7 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
     <FieldContainer {...fieldContainerProps}>
       <Box
         component="button"
-        popoverTarget={popverId}
+        popoverTarget={name}
         sx={{
           border: 1,
           borderInlineEnd: 0,
@@ -60,7 +58,7 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
         }}
       />
       <Box
-        id={popverId}
+        id={name}
         popover="auto"
         sx={{
           insetInlineEnd: "anchor(start)",
@@ -81,6 +79,7 @@ export const ColorPicker = ({ value, onChange, ...fieldContainerProps }: ColorPi
       </Box>
       <Box
         component="input"
+        name={name}
         ref={inputRef}
         key={value}
         sx={{

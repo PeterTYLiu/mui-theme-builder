@@ -37,14 +37,14 @@ export const deleteKeys = (input: ThemeOptions, keys: Array<string>): ThemeOptio
   const result = structuredClone(input);
 
   // Helper function to check if an object is empty
-  const isEmpty = (obj: any): boolean => {
+  const isEmpty = (obj: Record<string, any>): boolean => {
     if (obj === null || obj === undefined) return true;
     if (typeof obj !== "object") return false;
     return Object.keys(obj).length === 0;
   };
 
   // Helper function to recursively delete and clean up
-  const deleteAtPath = (obj: Record<any, any>, pathKeys: string[]): boolean => {
+  const deleteAtPath = (obj: Record<string, any>, pathKeys: string[]): boolean => {
     // Base case: if no keys left, shouldn't happen
     if (pathKeys.length === 0) return false;
 

@@ -1,6 +1,6 @@
 import { getContrastRatio, hslToRgb, lighten, rgbToHex, type ThemeOptions, type TypographyVariantsOptions } from "@mui/material";
 import { random, sample } from "lodash";
-import { EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "./components/TextEditor.tsx/TextEditor";
+import { EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "./constants";
 import { generateEmptyShadows, toStandardHex } from "./utils";
 
 const POSSIBLE_FONTS = [...WEB_SAFE_FONTS, ...EXAMPLE_GOOGLE_FONTS];

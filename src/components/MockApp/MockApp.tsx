@@ -48,7 +48,8 @@ import {
   type ChipProps,
 } from "@mui/material";
 import { useState } from "react";
-import { FAKE_DATA_1, FAKE_DATA_2, FAKE_DATA_3, Sparkline } from "../Sparkline/Sparkline";
+import { Sparkline } from "../Sparkline/Sparkline";
+import { FAKE_DATA_1, FAKE_DATA_2, FAKE_DATA_3 } from "./mockData";
 
 // Remove these styled components when MUI fixes table border colors
 // https://github.com/mui/material-ui/issues/47749

@@ -37,7 +37,7 @@ export const ShapeEditor = () => {
           isDefault={theme.spacing(1) === "8px"}
           value={Number(theme.spacing(1).slice(0, -2))}
           onChange={(num) => {
-            num === 8 ? deleteThemeOptionKey(["spacing"]) : mergeThemeOptions({ spacing: num });
+            return num === 8 ? deleteThemeOptionKey(["spacing"]) : mergeThemeOptions({ spacing: num });
           }}
           onReset={() => deleteThemeOptionKey(["spacing"])}
         />

@@ -60,12 +60,26 @@ export const BottomControls = () => {
       <Stack gap={1} direction="row" sx={{ alignItems: "center" }}>
         <Box
           sx={{
-            backgroundImage: "conic-gradient(#ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c1, #ff0000)",
+            "@keyframes rotate": {
+              from: { "--angle": "0deg" },
+              to: { "--angle": "360deg" },
+            },
+            "--angle": "0deg",
+            backgroundImage:
+              "conic-gradient(from var(--angle), #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c1, #ff0000)",
+            transition: "all 0.5s",
             borderRadius: 1,
             p: "1px",
+            "&:has(button:hover), &:has(button:focus)": {
+              animation: "rotate 1.6s linear infinite",
+            },
           }}
         >
-          <Button variant="contained" onClick={() => setThemeOptions(generateTheme())} sx={SHARED_BUTTON_STYLES}>
+          <Button
+            variant="contained"
+            onClick={() => setThemeOptions(generateTheme())}
+            sx={{ ...SHARED_BUTTON_STYLES, outlineOffset: "1px" }}
+          >
             Randomize!
           </Button>
         </Box>

@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { useRef } from "react";
 import { toast } from "sonner";
-import { DEFAULT_THEME } from "../../constants";
+import { DEFAULT_FONT, DEFAULT_THEME, EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { deleteKeys } from "../../utils";
 import { FieldContainer } from "../FieldContainer/FieldContainer";
@@ -29,52 +29,6 @@ const WEIGHTS: Array<{
   { name: "fontWeightRegular", defaultWeight: 400 },
   { name: "fontWeightMedium", defaultWeight: 500 },
   { name: "fontWeightBold", defaultWeight: 700 },
-];
-
-export const DEFAULT_FONT = '"Roboto", "Helvetica", "Arial", sans-serif';
-
-export const WEB_SAFE_FONTS = [
-  "Arial",
-  "Brush Script MT",
-  "Courier New",
-  "Comic Sans MS",
-  "Garamond",
-  "Georgia",
-  "Tahoma",
-  "Times New Roman",
-  "Trebuchet MS",
-  "Verdana",
-];
-
-export const EXAMPLE_GOOGLE_FONTS = [
-  "Merriweather",
-  "Open Sans",
-  "Inter",
-  "Montserrat",
-  "Lato",
-  "Noto Sans",
-  "Raleway",
-  "Noto Serif",
-  "Saira",
-  "Source Code Pro",
-  "Space Grotesk",
-  "ABeeZee",
-  "Sanchez",
-  "Libre Baskerville",
-  "Federant",
-  "Bitter",
-  "Lexend",
-  "Marcellus",
-  "Tenor Sans",
-  "Dosis",
-  "Sora",
-  "Fredoka",
-  "Play",
-  "Geologica",
-  "League Spartan",
-  "Geist Mono",
-  "SUSE",
-  "Overlock",
 ];
 
 const LOWER_CASE_FONTS = [DEFAULT_FONT, "", ...WEB_SAFE_FONTS].map((font) => font.toLowerCase());
@@ -272,7 +226,7 @@ export const TextEditor = () => {
                 min={100}
                 max={900}
                 onChange={(_, value) => {
-                  value === defaultWeight
+                  return value === defaultWeight
                     ? deleteThemeOptionKey(["typography", name])
                     : mergeThemeOptions({
                         typography: { [name]: value },

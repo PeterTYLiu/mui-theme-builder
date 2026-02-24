@@ -34,6 +34,7 @@ export const SubpaletteEditor = ({ name, manual = [], derived = [] }: Subpalette
   // Removing this teranry would result in us calling `toStandardHex` on an object
   const keylessColorPicker = !manual.length ? (
     <ColorPicker
+      name={name}
       isDefault={theme.palette[name] === PALETTES[mode][name]}
       value={toStandardHex(theme.palette[name])}
       onChange={(hex) =>
@@ -51,6 +52,7 @@ export const SubpaletteEditor = ({ name, manual = [], derived = [] }: Subpalette
     <FieldGroupContainer title={name} actions={derived.length > 0 ? derivedToggleButton : keylessColorPicker}>
       {manual.map((key) => (
         <ColorPicker
+          name={name + key}
           title={key}
           key={key}
           isDefault={theme.palette[name][key] === PALETTES[mode][name][key]}
@@ -85,9 +87,10 @@ export const SubpaletteEditor = ({ name, manual = [], derived = [] }: Subpalette
         >
           {derived.map((key) => (
             <ColorPicker
+              name={name + key}
               title={key}
               key={key}
-              isDefault={!Boolean(themeOptions?.palette?.[name]?.[key])}
+              isDefault={!themeOptions?.palette?.[name]?.[key]}
               value={toStandardHex(theme.palette[name][key])}
               onChange={(hex) =>
                 mergeThemeOptions({
