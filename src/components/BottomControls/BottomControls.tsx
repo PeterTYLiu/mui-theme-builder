@@ -35,12 +35,12 @@ const shareSite = async () => {
     await navigator.share({
       title: "MUI Theme Builder",
       text: "Modern MUI theme builder",
-      url: "https://google.com",
+      url: "https://petertyliu.github.io/mui-theme-builder",
     });
   } catch (err: any) {
     if (err.name === "AbortError") return;
     try {
-      await navigator.clipboard.writeText("https://google.com");
+      await navigator.clipboard.writeText("https://petertyliu.github.io/mui-theme-builder");
       toast.success("Site URL copied to clipboard");
     } catch (error) {
       toast.error("Failed to share URL");
