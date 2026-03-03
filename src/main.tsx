@@ -53,7 +53,7 @@ createRoot(document.getElementById("root")!).render(
             color: "var(--mui-palette-text-primary)",
             backgroundImage: "var(--mui-overlays-24)",
             border: 0,
-            borderRadius: 0,
+            borderRadius: "var(--mui-shape-borderRadius)",
           },
         }}
       />

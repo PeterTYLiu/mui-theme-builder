@@ -65,6 +65,7 @@ export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: C
           top: "anchor(top)",
           bgcolor: "background.default",
           positionTryFallbacks: "flip-block",
+          borderRadius: 1,
         }}
       >
         <Chrome
