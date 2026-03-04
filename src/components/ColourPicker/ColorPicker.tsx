@@ -56,7 +56,20 @@ export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: C
             pointerEvents: "none",
           },
         }}
-      />
+      >
+        <Box
+          sx={{
+            position: "absolute",
+            insetBlock: 0,
+            insetInlineStart: 0,
+            backgroundColor: value.substring(0, 7),
+            width: "15px",
+            borderRadius: "calc(var(--mui-shape-borderRadius) - 1px)",
+            borderEndEndRadius: 0,
+            borderStartEndRadius: 0,
+          }}
+        />
+      </Box>
       <Box
         id={name}
         popover="auto"
@@ -83,9 +96,10 @@ export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: C
         name={name}
         ref={inputRef}
         key={value}
+        autoCorrect="off"
+        spellCheck="false"
         sx={{
           fontFamily: "monospace",
-
           borderRadius: 1,
           borderStartStartRadius: 0,
           borderEndStartRadius: 0,
