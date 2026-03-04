@@ -32,6 +32,7 @@ export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: C
     <FieldContainer {...fieldContainerProps}>
       <Box
         component="button"
+        aria-label={"Open color picker for " + name}
         popoverTarget={name}
         sx={{
           border: 1,
