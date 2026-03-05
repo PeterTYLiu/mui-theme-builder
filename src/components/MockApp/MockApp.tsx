@@ -53,6 +53,7 @@ import { FAKE_DATA_1, FAKE_DATA_2, FAKE_DATA_3 } from "./mockData";
 
 // Remove these styled components when MUI fixes table border colors
 // https://github.com/mui/material-ui/issues/47749
+// ^ Ticket is closed yet issue persists. Probably has something to do with nested themes?
 
 const StyledTableHeaderCell = styled(TableCell)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,
