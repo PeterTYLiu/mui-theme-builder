@@ -1,7 +1,6 @@
 import { Code, Edit } from "@mui/icons-material";
 import { Paper, Tab, Tabs } from "@mui/material";
 import { Activity, useState } from "react";
-import { DIVIDER_COLOR } from "../../constants";
 import { CodePanel } from "../CodePanel/CodePanel";
 import { EditorPanel } from "../EditorPanel/EditorPanel";
 
@@ -16,7 +15,7 @@ export const ToolsPanel = () => {
         flexDirection: "column",
       }}
     >
-      <Tabs variant="fullWidth" onChange={(_, value) => setTab(value)} value={tab} sx={{ borderBottom: 1, borderColor: DIVIDER_COLOR }}>
+      <Tabs variant="fullWidth" onChange={(_, value) => setTab(value)} value={tab} sx={{ borderBottom: 1, borderColor: "divider" }}>
         <Tab icon={<Edit />} iconPosition="start" sx={{ minHeight: "48px" }} label="Editor" value="editor" />
         <Tab icon={<Code />} iconPosition="start" sx={{ minHeight: "48px" }} label="Code" value="code" />
       </Tabs>

@@ -1,6 +1,5 @@
 import { Box, Typography } from "@mui/material";
 import type { PropsWithChildren, ReactNode } from "react";
-import { DIVIDER_COLOR } from "../../constants";
 
 export interface FieldGroupContainerProps {
   title?: string;
@@ -15,7 +14,7 @@ export const FieldGroupContainer = ({ title, actions, children }: PropsWithChild
       sx={{
         p: 2,
         borderBottom: 1,
-        borderColor: DIVIDER_COLOR,
+        borderColor: "divider",
       }}
     >
       {hasHeader && (

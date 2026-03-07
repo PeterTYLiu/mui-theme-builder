@@ -55,7 +55,7 @@ export const SubpaletteEditor = ({ name, manual = [], derived = [] }: Subpalette
           name={name + key}
           title={key}
           key={key}
-          isDefault={theme.palette[name][key] === PALETTES[mode][name][key]}
+          isDefault={theme.palette[name][key] === toStandardHex(PALETTES[mode][name][key])}
           value={toStandardHex(theme.palette[name][key])}
           onChange={(hex) =>
             mergeThemeOptions({
