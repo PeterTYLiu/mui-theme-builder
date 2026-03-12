@@ -23,13 +23,24 @@ function App() {
   }, [themeOptions]);
 
   useEffect(() => {
-    const searchParams = new URLSearchParams(window.location.search);
-    const sharedTheme = searchParams.get("theme");
-    if (sharedTheme) {
-      // Toast doesn't work without timeout
-      setTimeout(() => toast.success("Loaded theme from URL"), 1000);
-      setThemeOptions(JSON.parse(decodeURIComponent(sharedTheme)));
-      history.replaceState(null, "", location.pathname);
+    try {
+      const searchParams = new URLSearchParams(window.location.search);
+      const sharedTheme = searchParams.get("theme");
+      if (sharedTheme) {
+        const themeObjectFromUrl = JSON.parse(decodeURIComponent(sharedTheme));
+        if (typeof themeObjectFromUrl !== "object") {
+          setTimeout(() => toast.error("Malformed theme in URL"), 1000);
+          return;
+        }
+        // Toast doesn't work without timeout
+        console.log(typeof themeObjectFromUrl);
+        setTimeout(() => toast.success("Loaded theme from URL"), 1000);
+        setThemeOptions(JSON.parse(decodeURIComponent(sharedTheme)));
+        history.replaceState(null, "", location.pathname);
+      }
+    } catch (e) {
+      console.error(e);
+      setTimeout(() => toast.error("Malformed theme in URL"), 1000);
     }
   }, []);
 

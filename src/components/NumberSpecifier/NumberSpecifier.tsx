@@ -39,7 +39,7 @@ export const NumberSpecifier = ({ title, onReset, isDefault, onChange, unit, ...
             background: "transparent",
             color: "text.primary",
             "::-webkit-inner-spin-button": {
-              "-webkit-appearance": "none",
+              appearance: "none",
               margin: 0,
             },
           }}
