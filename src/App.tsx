@@ -1,6 +1,7 @@
 import { Box, createTheme, Stack, ThemeProvider, type ThemeOptions } from "@mui/material";
 import { merge } from "lodash";
 import { useEffect, useState } from "react";
+import { toast } from "sonner";
 import { BottomControls } from "./components/BottomControls/BottomControls";
 import { InfoPanel } from "./components/InfoPanel/InfoPanel";
 import { MockApp } from "./components/MockApp/MockApp";
@@ -20,6 +21,17 @@ function App() {
   useEffect(() => {
     localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(themeOptions));
   }, [themeOptions]);
+
+  useEffect(() => {
+    const searchParams = new URLSearchParams(window.location.search);
+    const sharedTheme = searchParams.get("theme");
+    if (sharedTheme) {
+      // Toast doesn't work without timeout
+      setTimeout(() => toast.success("Loaded theme from URL"), 1000);
+      setThemeOptions(JSON.parse(decodeURIComponent(sharedTheme)));
+      history.replaceState(null, "", location.pathname);
+    }
+  }, []);
 
   return (
     <InnerThemeContext

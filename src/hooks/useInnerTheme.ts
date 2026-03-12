@@ -16,7 +16,6 @@ export const InnerThemeContext = createContext<InnerThemeContextValue>({
   mergeThemeOptions: () => {},
   setThemeOptions: () => {},
   deleteThemeOptionKey: () => {},
-
 });
 
 export const useInnerTheme = () => use(InnerThemeContext);

@@ -26,8 +26,9 @@ export const PaletteEditor = () => {
             if (!value) return;
             const newTheme: ThemeOptions = { palette: { mode: value } };
             const isNotDefaultBg = defaultBg !== (isLight ? defaultLightBackground : defaultDarkBackground);
-            const isDarkAndUsingDarkBg = !isLight && getLuminance(defaultBg) < 0.3;
-            const isLightAndUsingLightBg = isLight && getLuminance(defaultBg) > 0.3;
+            const isColorDarkThreshold = 0.25;
+            const isDarkAndUsingDarkBg = !isLight && getLuminance(defaultBg) < isColorDarkThreshold;
+            const isLightAndUsingLightBg = isLight && getLuminance(defaultBg) > isColorDarkThreshold;
 
             // Automatically adjust the background if switching modes
             if (isNotDefaultBg && (isLightAndUsingLightBg || isDarkAndUsingDarkBg)) {

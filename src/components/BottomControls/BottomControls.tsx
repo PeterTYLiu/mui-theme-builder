@@ -9,12 +9,16 @@ import {
   DialogTitle,
   IconButton,
   Link,
+  MenuItem,
+  MenuList,
+  Paper,
   Stack,
   Tooltip,
   Typography,
   type SxProps,
+  type ThemeOptions,
 } from "@mui/material";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { generateTheme } from "../../generateTheme";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
@@ -23,7 +27,7 @@ import { saveObjectToClipboard } from "../../utils";
 const SHARED_BUTTON_STYLES: SxProps = {
   bgcolor: "background.paper",
   backgroundImage: "var(--mui-overlays-1)",
-  "&:hover": { bgcolor: "background.paper" },
+  "&:hover": { bgcolor: "background.paper", backgroundImage: "none" },
   "&:disabled": { bgcolor: "background.paper", opacity: 0.5, color: "text.primary" },
   color: "text.primary",
   borderRadius: 1,
@@ -50,9 +54,31 @@ const shareSite = async () => {
   }
 };
 
+const shareTheme = async (themeOptions: ThemeOptions) => {
+  const shareLink = "https://petertyliu.github.io/mui-theme-builder/?theme=" + encodeURIComponent(JSON.stringify(themeOptions));
+  try {
+    await navigator.share({
+      title: "MUI Theme Builder",
+      text: "Check out this MUI theme",
+      url: shareLink,
+    });
+  } catch (err: any) {
+    if (err.name === "AbortError") return;
+    try {
+      await navigator.clipboard.writeText(shareLink);
+      toast.success("Share link copied to clipboard");
+    } catch (error) {
+      toast.error("Failed to share URL");
+      console.error(error);
+      throw error;
+    }
+  }
+};
+
 export const BottomControls = () => {
   const { setThemeOptions, themeOptions } = useInnerTheme();
   const [isResetDialogOpen, setIsResetDialogOpen] = useState(false);
+  const sharePopoverRef = useRef<HTMLDivElement | null>(null);
   const hasEditedTheme = Object.keys(themeOptions).length !== 0;
 
   return (
@@ -106,31 +132,25 @@ export const BottomControls = () => {
             </Button>
           </DialogActions>
         </Dialog>
-        <Tooltip title="Share">
-          <IconButton onClick={shareSite} sx={SHARED_BUTTON_STYLES}>
+        <Tooltip title={hasEditedTheme ? "Share..." : "Share"}>
+          <IconButton {...(hasEditedTheme ? { popoverTarget: "share-popover" } : { onClick: shareSite })} sx={SHARED_BUTTON_STYLES}>
             <Share />
           </IconButton>
         </Tooltip>
-        {/* <Tooltip title={hasEditedTheme ? "Share..." : "Share"}>
-                <IconButton
-                  {...(hasEditedTheme ? { popoverTarget: "share-popover" } : { onClick: shareSite })}
-                  {...SHARED_ICONBUTTON_PROPS}
-                >
-                  <Share />
-                </IconButton>
-              </Tooltip>
-              {hasEditedTheme && (
-                <Paper
-                  popover="auto"
-                  id="share-popover"
-                  sx={{ bottom: "anchor(top)", insetInlineEnd: "anchor(end)", bgcolor: "primary.dark", p: 0 }}
-                >
-                  <MenuList>
-                    <MenuItem onClick={shareSite}>Share site</MenuItem>
-                    <MenuItem onClick={() => {}}>Share this theme</MenuItem>
-                  </MenuList>
-                </Paper>
-              )} */}
+        {hasEditedTheme && (
+          <Paper
+            ref={sharePopoverRef}
+            popover="auto"
+            id="share-popover"
+            sx={{ bottom: "calc(anchor(top) + 8px)", insetInlineEnd: "anchor(end)", p: 0, transition: "0.3s all" }}
+            onClick={() => sharePopoverRef.current?.hidePopover()}
+          >
+            <MenuList>
+              <MenuItem onClick={shareSite}>Share site</MenuItem>
+              <MenuItem onClick={() => shareTheme(themeOptions)}>Share this theme</MenuItem>
+            </MenuList>
+          </Paper>
+        )}
       </Stack>
       <Typography color="#ddd" sx={{ display: { sm: "none" } }}>
         View on a larger screen to edit&nbsp;&nbsp;|&nbsp;&nbsp;
