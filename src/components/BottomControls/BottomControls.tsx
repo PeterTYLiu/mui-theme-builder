@@ -41,6 +41,7 @@ const shareSite = async () => {
       text: "Modern MUI theme builder",
       url: "https://petertyliu.github.io/mui-theme-builder",
     });
+    
   } catch (err: any) {
     if (err.name === "AbortError") return;
     try {
