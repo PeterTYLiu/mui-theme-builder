@@ -24,6 +24,10 @@ import { generateTheme } from "../../generateTheme";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { saveObjectToClipboard } from "../../utils";
 
+const trackButton = (buttonName: string) => {
+  gtag("event", "click", { button: buttonName });
+};
+
 const SHARED_BUTTON_STYLES: SxProps = {
   bgcolor: "background.paper",
   backgroundImage: "var(--mui-overlays-1)",
@@ -35,13 +39,13 @@ const SHARED_BUTTON_STYLES: SxProps = {
 };
 
 const shareSite = async () => {
+  trackButton("share-site");
   try {
     await navigator.share({
       title: "MUI Theme Builder",
       text: "Modern MUI theme builder",
       url: "https://petertyliu.github.io/mui-theme-builder",
     });
-    
   } catch (err: any) {
     if (err.name === "AbortError") return;
     try {
@@ -94,19 +98,36 @@ export const BottomControls = () => {
         >
           <Button
             variant="contained"
-            onClick={() => setThemeOptions(generateTheme())}
+            onClick={() => {
+              trackButton("randomize");
+              setThemeOptions(generateTheme());
+            }}
             sx={{ ...SHARED_BUTTON_STYLES, outlineOffset: "1px" }}
           >
             Randomize!
           </Button>
         </Box>
         <Tooltip title="Export theme">
-          <IconButton disabled={!hasEditedTheme} onClick={() => saveObjectToClipboard(themeOptions)} sx={SHARED_BUTTON_STYLES}>
+          <IconButton
+            disabled={!hasEditedTheme}
+            onClick={() => {
+              trackButton("export-theme");
+              saveObjectToClipboard(themeOptions);
+            }}
+            sx={SHARED_BUTTON_STYLES}
+          >
             <GetApp />
           </IconButton>
         </Tooltip>
         <Tooltip title="Reset">
-          <IconButton disabled={!hasEditedTheme} onClick={() => setIsResetDialogOpen(true)} sx={SHARED_BUTTON_STYLES}>
+          <IconButton
+            disabled={!hasEditedTheme}
+            onClick={() => {
+              trackButton("reset");
+              setIsResetDialogOpen(true);
+            }}
+            sx={SHARED_BUTTON_STYLES}
+          >
             <Refresh />
           </IconButton>
         </Tooltip>
@@ -125,6 +146,7 @@ export const BottomControls = () => {
             <Button
               onClick={() => {
                 setIsResetDialogOpen(false);
+                trackButton("reset-in-dialog");
                 setThemeOptions({});
               }}
               autoFocus
@@ -148,7 +170,14 @@ export const BottomControls = () => {
           >
             <MenuList>
               <MenuItem onClick={shareSite}>Share site</MenuItem>
-              <MenuItem onClick={() => shareTheme(themeOptions)}>Share this theme</MenuItem>
+              <MenuItem
+                onClick={() => {
+                  trackButton("share-theme");
+                  shareTheme(themeOptions);
+                }}
+              >
+                Share this theme
+              </MenuItem>
             </MenuList>
           </Paper>
         )}

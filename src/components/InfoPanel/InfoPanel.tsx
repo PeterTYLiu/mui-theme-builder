@@ -1,12 +1,7 @@
 import { Check, Favorite, GitHub, LinkedIn } from "@mui/icons-material";
 import { Divider, IconButton, Link, Paper, Stack, Tooltip, Typography } from "@mui/material";
-import type { PointerEventHandler } from "react";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
 import { ComponentList } from "../ComponentList/ComponentList";
-
-const track: PointerEventHandler<HTMLAnchorElement> = (event) => {
-  gtag("event", "click", { link: event.currentTarget.href });
-};
 
 export const InfoPanel = () => {
   const { themeOptions } = useInnerTheme();
@@ -39,12 +34,12 @@ export const InfoPanel = () => {
 
       <Stack direction="row" sx={{ gap: 0.5 }}>
         <Tooltip title="Github repo">
-          <IconButton size="large" onClick={track} href="https://github.com/PeterTYLiu/mui-theme-builder" target="_blank">
+          <IconButton size="large" href="https://github.com/PeterTYLiu/mui-theme-builder" target="_blank">
             <GitHub fontSize="medium" />
           </IconButton>
         </Tooltip>
         <Tooltip title="MUI docs">
-          <IconButton onClick={track} size="large" href="https://mui.com/material-ui/getting-started/" target="_blank">
+          <IconButton size="large" href="https://mui.com/material-ui/getting-started/" target="_blank">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -63,13 +58,12 @@ export const InfoPanel = () => {
           </IconButton>
         </Tooltip>
         <Tooltip title="My LinkedIn">
-          <IconButton onClick={track} size="large" href="https://www.linkedin.com/in/peter-ty-liu/" target="_blank">
+          <IconButton size="large" href="https://www.linkedin.com/in/peter-ty-liu/" target="_blank">
             <LinkedIn fontSize="medium" />
           </IconButton>
         </Tooltip>
         <Tooltip title="Donate to Ukraine">
           <IconButton
-            onClick={track}
             size="large"
             href="https://u24.gov.ua/"
             target="_blank"
