@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { Chrome } from "@uiw/react-color";
-import { useRef, type FocusEvent, type KeyboardEvent } from "react";
+import { useRef, type FocusEventHandler, type KeyboardEventHandler } from "react";
 import { decimalToHex, intToHex, toStandardHex } from "../../utils";
 import { FieldContainer, type FieldContainerProps } from "../FieldContainer/FieldContainer";
 
@@ -10,8 +10,10 @@ interface ColorPickerProps extends FieldContainerProps {
   onChange: (hex: string) => void;
 }
 
+type InputRefType = HTMLInputElement;
+
 export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: ColorPickerProps) => {
-  const inputRef = useRef<HTMLInputElement>(null);
+  const inputRef = useRef<InputRefType>(null);
   const handleNewInputValue = (inputValue: string) => {
     const newValue = toStandardHex(inputValue, value);
     if (newValue === value) return;
@@ -19,13 +21,13 @@ export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: C
     inputRef.current!.value = newValue;
   };
 
-  const onInputBlur = (e: FocusEvent<HTMLInputElement>) => {
+  const onInputBlur: FocusEventHandler<InputRefType> = (e) => {
     handleNewInputValue(e.target.value);
   };
 
-  const onInputEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+  const onInputEnter: KeyboardEventHandler<InputRefType> = (e) => {
     if (e.key !== "Enter") return;
-    handleNewInputValue((e.target as HTMLInputElement).value);
+    handleNewInputValue(e.currentTarget.value);
   };
 
   return (
