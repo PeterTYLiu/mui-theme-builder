@@ -1,5 +1,5 @@
 import { Box, Stack, Typography, useTheme } from "@mui/material";
-import { areaElementClasses, chartsAxisHighlightClasses, lineElementClasses } from "@mui/x-charts";
+import { chartsAxisHighlightClasses, lineClasses } from "@mui/x-charts";
 import { SparkLineChart, type SparkLineChartProps } from "@mui/x-charts/SparkLineChart";
 import { useState, type ReactNode } from "react";
 import type { DataPoint } from "../../types";
@@ -30,16 +30,16 @@ export const Sparkline = ({ title, data, icon }: { title: string; data: Array<Da
   const color = isIncreasing ? "success" : "error";
 
   return (
-    <Box width="100%" display="flex" justifyContent="center" alignItems="center">
-      <Stack direction="column" width="100%">
-        <Stack direction="row" alignItems="flex-start" gap={1} alignContent="center">
+    <Box sx={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>
+      <Stack direction="column" sx={{ width: "100%" }}>
+        <Stack direction="row" sx={{ alignItems: "flex-start", gap: 1, alignContent: "center" }}>
           {icon}
-          <Typography variant="subtitle2" lineHeight={1.5}>
+          <Typography variant="subtitle2" sx={{ lineHeight: 1.5 }}>
             {title}
           </Typography>
         </Stack>
 
-        <Stack direction="row" justifyContent="space-between" alignItems="flex-end" gap={2} sx={{ containerType: "inline-size" }}>
+        <Stack direction="row" sx={{ containerType: "inline-size", alignItems: "flex-end", justifyContent: "space-between" }}>
           <Typography variant="h6" color="textSecondary">
             {downloads[weekIndex ?? downloads.length - 1].toLocaleString()}
           </Typography>
@@ -66,8 +66,8 @@ export const Sparkline = ({ title, data, icon }: { title: string; data: Array<Da
                 setWeekIndex(axisItems[0]?.dataIndex ?? null);
               }}
               sx={{
-                [`& .${areaElementClasses.root}`]: { opacity: 0.2 },
-                [`& .${lineElementClasses.root}`]: { strokeWidth: 3 },
+                [`& .${lineClasses.area}`]: { opacity: 0.2 },
+                [`& .${lineClasses.line}`]: { strokeWidth: 3 },
                 [`& .${chartsAxisHighlightClasses.root}`]: {
                   stroke: palette[color].light,
                   strokeDasharray: "none",

@@ -20,7 +20,7 @@ export const InfoPanel = () => {
       <Stack>
         <Typography variant="h5">MUI&nbsp;Theme&nbsp;Builder</Typography>
         <Typography variant="subtitle2" color="text.secondary">
-          Compatible with MUI 5 to 7
+          Compatible with MUI 5 to 9
         </Typography>
       </Stack>
       <svg style={{ width: 0, height: 0, position: "absolute" }} aria-hidden="true" focusable="false">

@@ -199,7 +199,7 @@ export const MockApp = () => {
           <Typography color="text.primary" variant="h6">
             Tuesday, October 18
           </Typography>
-          <Stack direction="row" gap={1}>
+          <Stack direction="row" sx={{ gap: 1 }}>
             <Button variant="outlined" startIcon={<Upgrade />} onClick={() => setIsDialogOpen(true)} className="dialog-override">
               Export...
             </Button>
@@ -251,7 +251,7 @@ export const MockApp = () => {
                         </Link>
                       </StyledTableBodyCell>
                       <StyledTableBodyCell>
-                        <Stack direction="row" gap={1} alignItems="center">
+                        <Stack direction="row" sx={{ gap: 1, alignItems: "center" }}>
                           <Avatar
                             sx={{
                               width: 24,
@@ -283,8 +283,8 @@ export const MockApp = () => {
             <TablePagination component="div" count={6} page={0} onPageChange={() => {}} rowsPerPage={10} />
           </Paper>
           <Paper sx={{ p: 2, flex: "1 1 250px" }} className="paper-override">
-            <Stack direction="row" justifyContent="space-between" alignItems="center" gap={2} mb={1.5}>
-              <Typography fontWeight="bold">Analytics</Typography>
+            <Stack direction="row" sx={{ justifyContent: "space-between", alignItems: "center", gap: 2, mb: 1.5 }}>
+              <Typography sx={{ fontWeight: "bold" }}>Analytics</Typography>
               <Select size="small" value={15} className="select-override">
                 <MenuItem value={10}>Today</MenuItem>
                 <MenuItem value={15}>This Week</MenuItem>
@@ -319,7 +319,7 @@ export const MockApp = () => {
             </Stack>
 
             <Divider />
-            <Stack pt={1.5} gap={2}>
+            <Stack sx={{ pt: 1.5, gap: 2 }}>
               <Sparkline title="Tracking events" data={FAKE_DATA_1} icon={<TrackChanges fontSize="small" />} />
               <Sparkline title="Retention rate" data={FAKE_DATA_2} icon={<GasMeterRounded fontSize="small" />} />
               <Sparkline title="Customer TTRs" data={FAKE_DATA_3} icon={<AcUnitSharp fontSize="small" />} />

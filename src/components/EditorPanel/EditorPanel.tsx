@@ -27,9 +27,9 @@ export const EditorPanel = () => {
         >
           {BUTTON_DATA.map(({ name, icon }) => (
             <Button key={name} variant={section === name ? "contained" : "outlined"} onClick={() => setSection(name)} sx={{ py: 1 }}>
-              <Stack alignItems="center" gap={1}>
+              <Stack sx={{ gap: 1, alignItems: "center" }}>
                 {icon}
-                <Stack height={24} sx={{ placeContent: "center" }}>
+                <Stack sx={{ placeContent: "center", height: 24 }}>
                   <Typography
                     sx={{
                       lineHeight: "1",

@@ -87,8 +87,8 @@ export const BottomControls = () => {
   const hasEditedTheme = Object.keys(themeOptions).length !== 0;
 
   return (
-    <Stack gap={2} sx={{ p: { xs: 2, sm: 3, md: 4 }, pt: { xs: 0, sm: 0, md: 0 } }} alignItems="center">
-      <Stack gap={1} direction="row" sx={{ alignItems: "center" }}>
+    <Stack sx={{ gap: 2, alignItems: "center", p: { xs: 2, sm: 3, md: 4 }, pt: { xs: 0, sm: 0, md: 0 } }}>
+      <Stack direction="row" sx={{ gap: 2, alignItems: "center" }}>
         <Box
           sx={{
             backgroundImage: "conic-gradient(#ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c1, #ff0000)",
