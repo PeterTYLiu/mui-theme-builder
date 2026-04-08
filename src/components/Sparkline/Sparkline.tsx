@@ -8,9 +8,9 @@ const settings: Partial<SparkLineChartProps> = {
   baseline: "min",
   margin: { bottom: 0, top: 5, left: 4, right: 0 },
   yAxis: {
-    domainLimit: (_, maxValue: number) => ({
-      min: -maxValue / 6, //  Hack to add 5px bellow 0 like npm.
-      max: maxValue,
+    domainLimit: (_, max) => ({
+      min: -max / 6, //  Hack to add 5px bellow 0 like npm.
+      max,
     }),
   },
   slotProps: {

@@ -12,9 +12,9 @@
   "dependencies": {
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/icons-material": "^7.3.9",
+    "@mui/icons-material": "^9.0.0",
     "@mui/material": "^9.0.0",
-    "@mui/x-charts": "^8.27.5",
+    "@mui/x-charts": "^9.0.0",
     "@types/gtag.js": "^0.0.20",
     "@uiw/react-color": "^2.9.6",
     "@vitejs/plugin-react": "^6.0.1",
