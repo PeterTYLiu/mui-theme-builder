@@ -196,7 +196,7 @@ export const MockApp = () => {
             mb: 2,
           }}
         >
-          <Typography color="text.primary" variant="h6">
+          <Typography sx={{ color: "text.primary" }} variant="h6">
             Tuesday, October 18
           </Typography>
           <Stack direction="row" sx={{ gap: 1 }}>

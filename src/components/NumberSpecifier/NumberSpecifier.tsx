@@ -55,7 +55,7 @@ export const NumberSpecifier = ({ title, onReset, isDefault, onChange, unit, ...
               pointerEvents: "none",
             }}
           >
-            <Typography variant="subtitle2" color="textSecondary">
+            <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
               {unit}
             </Typography>
           </Box>

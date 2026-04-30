@@ -29,7 +29,7 @@ export const FieldContainer = ({ title, children, isDefault, onReset, titleSx }:
             marginInlineEnd: 2,
           }}
         >
-          <Typography variant="subtitle2" color="textSecondary" sx={{ textTransform: "capitalize", ...titleSx }}>
+          <Typography variant="subtitle2" sx={{ color: "text.secondary", textTransform: "capitalize", ...titleSx }}>
             {title}
           </Typography>
         </Box>

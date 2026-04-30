@@ -182,7 +182,7 @@ export const BottomControls = () => {
           </Paper>
         )}
       </Stack>
-      <Typography color="#ddd" sx={{ display: { sm: "none" } }}>
+      <Typography sx={{ display: { sm: "none" }, color: "#ddd" }}>
         View on a larger screen to edit&nbsp;&nbsp;|&nbsp;&nbsp;
         <Link href="https://github.com/PeterTYLiu/mui-theme-builder" target="_blank">
           Github
