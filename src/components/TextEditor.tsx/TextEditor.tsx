@@ -98,10 +98,15 @@ export const TextEditor = () => {
             }
           }}
           fullWidth
+          slotProps={{ listbox: { sx: { border: 1, borderColor: "#444" } } }}
           renderInput={(params) => <TextField {...params} />}
           renderGroup={(params) => (
             <li key={params.key}>
-              <Box sx={{ bgcolor: "primary.dark", p: 0.5 }}>{params.group}</Box>
+              <Box sx={{ p: 0.5 }}>
+                <Typography variant="caption" sx={{ textTransform: "uppercase", color: "text.secondary" }}>
+                  {params.group}
+                </Typography>
+              </Box>
               <div>{params.children}</div>
             </li>
           )}

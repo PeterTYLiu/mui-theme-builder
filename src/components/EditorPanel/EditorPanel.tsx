@@ -26,7 +26,19 @@ export const EditorPanel = () => {
           }}
         >
           {BUTTON_DATA.map(({ name, icon }) => (
-            <Button key={name} variant={section === name ? "contained" : "outlined"} onClick={() => setSection(name)} sx={{ py: 1 }}>
+            <Button
+              key={name}
+              variant={section === name ? "contained" : "outlined"}
+              onClick={() => setSection(name)}
+              sx={{
+                py: 1,
+                ...(section === name && {
+                  "&:hover": {
+                    bgcolor: section === name ? "primary.main" : undefined,
+                  },
+                }),
+              }}
+            >
               <Stack sx={{ gap: 1, alignItems: "center" }}>
                 {icon}
                 <Stack sx={{ placeContent: "center", height: 24 }}>

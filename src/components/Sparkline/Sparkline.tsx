@@ -40,7 +40,7 @@ export const Sparkline = ({ title, data, icon }: { title: string; data: Array<Da
         </Stack>
 
         <Stack direction="row" sx={{ containerType: "inline-size", alignItems: "flex-end", justifyContent: "space-between" }}>
-          <Typography variant="h6" color="textSecondary">
+          <Typography variant="h6" sx={{ color: "text.secondary" }}>
             {downloads[weekIndex ?? downloads.length - 1].toLocaleString()}
           </Typography>
           <Box

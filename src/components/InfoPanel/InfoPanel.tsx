@@ -19,7 +19,7 @@ export const InfoPanel = () => {
     >
       <Stack>
         <Typography variant="h5">MUI&nbsp;Theme&nbsp;Builder</Typography>
-        <Typography variant="subtitle2" color="text.secondary">
+        <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
           Compatible with MUI 5 to 9
         </Typography>
       </Stack>
@@ -76,10 +76,10 @@ export const InfoPanel = () => {
       {hasEditedTheme && (
         <Stack
           direction="row"
-          sx={{ gap: 0.5, borderRadius: "99px", bgcolor: "background.default", p: 0.5, paddingInlineEnd: 1, alignContent: "center" }}
+          sx={{ gap: 0.5, borderRadius: "99px", bgcolor: "common.black", p: 0.5, paddingInlineEnd: 1, alignContent: "center" }}
         >
           <Check color="success" fontSize="small" />
-          <Typography variant="subtitle2" color="text.secondary">
+          <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
             Changes&nbsp;saved&nbsp;locally
           </Typography>
         </Stack>
@@ -88,13 +88,13 @@ export const InfoPanel = () => {
       <Typography variant="h6">Components</Typography>
       <ComponentList />
       <Divider />
-      <Typography variant="subtitle2" color="text.secondary">
+      <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
         Inspired by{" "}
         <Link href="https://bareynol.github.io/mui-theme-creator" target="_blank">
           @bareynol
         </Link>
       </Typography>
-      <Typography variant="subtitle2" color="text.secondary">
+      <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
         Made with ❤️ by{" "}
         <Link href="https://www.linkedin.com/in/peter-ty-liu/" target="_blank">
           Peter Liu

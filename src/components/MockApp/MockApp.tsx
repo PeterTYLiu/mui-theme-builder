@@ -267,7 +267,7 @@ export const MockApp = () => {
                       <StyledTableBodyCell>
                         <Box>
                           <Typography>{data.customer}</Typography>
-                          <Typography variant="subtitle2" color="textSecondary">
+                          <Typography variant="subtitle2" sx={{ color: "text.secondary" }}>
                             {data.orderer}
                           </Typography>
                         </Box>

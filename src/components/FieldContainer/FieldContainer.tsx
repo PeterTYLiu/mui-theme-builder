@@ -45,7 +45,7 @@ export const FieldContainer = ({ title, children, isDefault, onReset, titleSx }:
         }}
       >
         {isDefault ? (
-          <Typography variant="subtitle2" color="textDisabled" sx={{ fontSize: 11 }}>
+          <Typography variant="subtitle2" sx={{ fontSize: 11, color: "text.disabled" }}>
             auto
           </Typography>
         ) : (
