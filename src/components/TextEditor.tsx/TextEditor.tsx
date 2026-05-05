@@ -12,7 +12,7 @@ import {
   Typography,
   type TypographyVariants,
 } from "@mui/material";
-import { useRef } from "react";
+import { useRef, type SyntheticEvent } from "react";
 import { toast } from "sonner";
 import { DEFAULT_FONT, DEFAULT_THEME, EXAMPLE_GOOGLE_FONTS, WEB_SAFE_FONTS } from "../../constants";
 import { useInnerTheme } from "../../hooks/useInnerTheme";
@@ -57,6 +57,12 @@ export const TextEditor = () => {
     }
   };
 
+  const handleAutoCompleteChange = (_: SyntheticEvent, value: string | null) => {
+    if (!value || value === DEFAULT_FONT) {
+      deleteThemeOptionKey(["typography", "fontFamily"]);
+    } else mergeThemeOptions({ typography: { fontFamily: value } });
+  };
+
   return (
     <>
       <FieldGroupContainer title="Text Size">
@@ -73,16 +79,8 @@ export const TextEditor = () => {
       </FieldGroupContainer>
       <FieldGroupContainer title="Font Family">
         <Autocomplete
-          onChange={(_, value) => {
-            if (!value || value === DEFAULT_FONT) {
-              deleteThemeOptionKey(["typography", "fontFamily"]);
-            } else mergeThemeOptions({ typography: { fontFamily: value } });
-          }}
-          onInputChange={(_, value) => {
-            if (!value || value === DEFAULT_FONT) {
-              deleteThemeOptionKey(["typography", "fontFamily"]);
-            } else mergeThemeOptions({ typography: { fontFamily: value } });
-          }}
+          onChange={handleAutoCompleteChange}
+          onInputChange={handleAutoCompleteChange}
           value={currentFont}
           inputValue={currentFont}
           freeSolo
@@ -98,7 +96,7 @@ export const TextEditor = () => {
             }
           }}
           fullWidth
-          slotProps={{ listbox: { sx: { border: 1, borderColor: "#444" } } }}
+          slotProps={{ listbox: { sx: { border: 1, borderColor: "divider" } } }}
           renderInput={(params) => <TextField {...params} />}
           renderGroup={(params) => (
             <li key={params.key}>
