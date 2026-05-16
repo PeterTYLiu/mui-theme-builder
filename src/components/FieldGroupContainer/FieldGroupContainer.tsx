@@ -11,8 +11,11 @@ export const FieldGroupContainer = ({ title, actions, children }: PropsWithChild
 
   return (
     <Box
+      component="fieldset"
       sx={{
+        m: 0,
         p: 2,
+        border: 0,
         borderBottom: 1,
         borderColor: "divider",
       }}
@@ -29,7 +32,7 @@ export const FieldGroupContainer = ({ title, actions, children }: PropsWithChild
           }}
         >
           {Boolean(title) && (
-            <Typography variant="subtitle1" component="h3" sx={{ lineHeight: "initial", textTransform: "uppercase" }}>
+            <Typography variant="subtitle1" component="legend" sx={{ lineHeight: "initial", textTransform: "uppercase", p: 0 }}>
               {title}
             </Typography>
           )}
