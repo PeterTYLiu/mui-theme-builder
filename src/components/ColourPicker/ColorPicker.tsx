@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 import { Chrome } from "@uiw/react-color";
-import { useRef, type FocusEventHandler, type KeyboardEventHandler } from "react";
+import { useId, useRef, type FocusEventHandler, type KeyboardEventHandler } from "react";
 import { decimalToHex, intToHex, toStandardHex } from "../../utils";
 import { FieldContainer, type FieldContainerProps } from "../FieldContainer/FieldContainer";
 
@@ -13,6 +13,7 @@ interface ColorPickerProps extends FieldContainerProps {
 type InputRefType = HTMLInputElement;
 
 export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: ColorPickerProps) => {
+  const popoverId = useId();
   const inputRef = useRef<InputRefType>(null);
   const handleNewInputValue = (inputValue: string) => {
     const newValue = toStandardHex(inputValue, value);
@@ -35,7 +36,7 @@ export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: C
       <Box
         component="button"
         aria-label={"Open color picker for " + name}
-        popoverTarget={name}
+        popoverTarget={popoverId}
         sx={{
           border: 1,
           borderInlineEnd: 0,
@@ -74,11 +75,10 @@ export const ColorPicker = ({ value, onChange, name, ...fieldContainerProps }: C
         />
       </Box>
       <Box
-        id={name}
+        id={popoverId}
         popover="auto"
         sx={{
-          insetInlineEnd: "anchor(start)",
-          top: "anchor(top)",
+          positionArea: "bottom span-left",
           bgcolor: "background.default",
           positionTryFallbacks: "flip-block",
           borderRadius: 1,
